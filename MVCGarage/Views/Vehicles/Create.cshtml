@@ -19,7 +19,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal" style="color: white;">
+    <div class="form-horizontal jumbotron" style="color: white;">
         <h1 style="text-align: center;">Vehicle</h1>
         <hr />
         <br />
@@ -63,7 +63,7 @@
 }
 
 <div style="text-align: center; display: block; font-size: 2em; margin-bottom: 3em;">
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "DisplayAllVehicles", "Garage")
 </div>
 
 @section Scripts {

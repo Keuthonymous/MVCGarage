@@ -50,12 +50,12 @@
         </div>
     </div>
 
-    <div class="body-text">
+    <div style="text-align: center; display: block; font-size: 2em; color: white; margin-bottom: 3em;">
         <input name="submit-button"
                type="submit"
-               style="font-weight:bold;margin:20px auto; text-align: center; display:block"
+               style="font-weight:bold;margin:20px auto;"
                value="Choose the selected vehicle"
                class="btn btn-default" /> |
-        @Html.ActionLink("Back to List", "Index", "Home", new { style = "display: block; text-align: center;" })
+        @Html.ActionLink("Back to List", "DisplayAllVehicles", "Garage")
     </div>
 }
