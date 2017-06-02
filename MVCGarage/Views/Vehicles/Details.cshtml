@@ -4,42 +4,54 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="header jumbotron">
+    <h2>Details</h2>
+    <hr />
+    <p>This is where you can view details for a vehicle</p>
+</div>
 
 <div>
-    <h4>Vehicle</h4>
+    <h1 style="text-align: center; color: white;">Vehicle</h1>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.VehicleType)
-        </dt>
-        <dd>
-            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
-        </dd>
+    <div class="index-table">
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VehicleType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Owner)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RegistrationPlate)
+                </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Owner)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Owner)
-        </dd>
+                <th>
+                    @Html.DisplayNameFor(model => model.CheckInTime)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Owner)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.RegistrationPlate)
+                </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RegistrationPlate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RegistrationPlate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CheckInTime)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CheckInTime)
-        </dd>
-    </dl>
+                <td>
+                    @Html.DisplayFor(model => model.CheckInTime)
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div style="text-align:center; display:block; font-size: 2em; margin-bottom: 3em; color: white;">
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
