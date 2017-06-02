@@ -23,19 +23,10 @@
                         @Html.DisplayNameFor(model => model.Owner)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Fee)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.RegistrationPlate)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.CheckInTime)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CheckOutTime)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ParkingSpot)
                     </th>
                     <th></th>
                 </tr>
@@ -44,25 +35,16 @@
             {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.VehicleType)
+                            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.VehicleType))
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Owner)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Fee)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.RegistrationPlate)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.CheckInTime)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CheckOutTime)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ParkingSpot)
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
@@ -75,3 +57,4 @@
             </table>
         </div>
     </div>
+</div>

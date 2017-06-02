@@ -10,45 +10,40 @@
 </div>
 
 <div class="about-body-text" style="color: white; margin-top: 10em; text-align: center;">
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => Model.SelectedVehicle.VehicleType)
-        </dt>
-        <dd>
-            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.SelectedVehicle.VehicleType))
-        </dd>
+    <div class="index-table">
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SelectedVehicle.RegistrationPlate)
+                </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => Model.SelectedVehicle.RegistrationPlate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => Model.SelectedVehicle.RegistrationPlate)
-        </dd>
+                <th>
+                    @Html.DisplayNameFor(model => model.SelectedVehicle.Owner)
+                </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => Model.SelectedVehicle.Owner)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => Model.SelectedVehicle.Owner)
-        </dd>
-    </dl>
+                <th>
+                    @Html.DisplayNameFor(model => model.SelectedVehicle.VehicleType)
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.SelectedVehicle.RegistrationPlate)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.SelectedVehicle.Owner)
+                </td>
+
+                <td>
+                    @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.SelectedVehicle.VehicleType))
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
-@*<p>
-        @Html.ActionLink("Create New",
-                         "Create",
-                         "ParkingSpots",
-                         new MVCGarage.ViewModels.ParkingSpots.CreateParkingSpotsVM
-                         {
-                             OriginActionName = "SelectAParkingSpot",
-                             OriginControllerName = "Garage",
-                             SelectedVehicleId = Model.VehicleID,
-                             VehicleType = Model.SelectedVehicle.VehicleType
-                         },
-                         null)
-    </p>*@
-
-@using (@Html.BeginForm(Model.OriginActionName, Model.OriginControllerName, FormMethod.Post))
+@using (@Html.BeginForm(Model.FollowingActionName, Model.FollowingControllerName, FormMethod.Post))
 {
     <div class="index-table">
         <table>
@@ -59,6 +54,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ParkingSpots.First().Label)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkingSpots.First().Fee)
+                </th>
             </tr>
 
             @foreach (var item in Model.ParkingSpots)
@@ -66,7 +64,7 @@
                 <tr>
                     <td>
                         @if (Model.ParkingSpotID == item.ID)
-                    {
+                        {
                             @Html.RadioButtonFor(modelItem => Model.ParkingSpotID, item.ID, new { Checked = "checked" })
                         }
                         else
@@ -77,20 +75,23 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Label)
                     </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fee)/min.
+                    </td>
                 </tr>
             }
 
         </table>
     </div>
 
-        <div>
-            <input name="submit-button"
-                   type="submit"
-                   style="font-weight:bold;margin:10px 0 10px 0;"
-                   value="Choose the selected Parking Spot"
-                   class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index", "ParkingSpots")
-            @Html.HiddenFor(model => Model.VehicleID)
-        </div>
+    <div>
+        <input name="submit-button"
+               type="submit"
+               style="font-weight:bold;margin:10px 0 10px 0;"
+               value="Choose the selected Parking Spot"
+               class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "Index", "Home")
+        @Html.HiddenFor(model => Model.VehicleID)
+    </div>
 
 }

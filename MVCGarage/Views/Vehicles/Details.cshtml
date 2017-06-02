@@ -13,31 +13,20 @@
         <dt>
             @Html.DisplayNameFor(model => model.VehicleType)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.VehicleType)
+            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Owner)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Owner)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Fee)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fee)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.RegistrationPlate)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.RegistrationPlate)
         </dd>
@@ -45,27 +34,9 @@
         <dt>
             @Html.DisplayNameFor(model => model.CheckInTime)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.CheckInTime)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CheckOutTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CheckOutTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ParkingSpot)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ParkingSpot)
-        </dd>
-
     </dl>
 </div>
 <p>

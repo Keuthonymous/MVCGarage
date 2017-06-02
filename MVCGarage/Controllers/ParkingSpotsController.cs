@@ -1,7 +1,8 @@
 ﻿using MVCGarage.Models;
 using MVCGarage.Repositories;
-using MVCGarage.ViewModels.Garage;
 using MVCGarage.ViewModels.ParkingSpots;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -11,13 +12,56 @@ namespace MVCGarage.Controllers
     {
         private ParkingSpotsRepository db = new ParkingSpotsRepository();
 
-        // GET: ParkingSpots
-        public ActionResult Index(bool filterAvailableOnly = false)
+
+        private IEnumerable<ParkingSpot> Sort(IEnumerable<ParkingSpot> list, string sortOrder)
         {
+            ViewBag.LabelSortParam = string.IsNullOrEmpty(sortOrder) ? "label_desc" : "label_asc";
+            ViewBag.AvailableSortParam = sortOrder == "available_asc" ? "available_desc" : "available_asc";
+            ViewBag.VehicleTypeSortParam = sortOrder == "vehicletype_asc" ? "vehicletype_desc" : "vehicletype_asc";
+            ViewBag.FeeSortParam = sortOrder == "fee_asc" ? "fee_desc" : "fee_asc";
+
+            switch (sortOrder)
+            {
+                case "label_desc":
+                    list = list.OrderByDescending(p => p.Label);
+                    break;
+                case "available_asc":
+                    list = list.OrderBy(p => p.Available());
+                    break;
+                case "available_desc":
+                    list = list.OrderByDescending(p => p.Available());
+                    break;
+                case "vehicletype_asc":
+                    list = list.OrderBy(p => EnumHelper.GetDescriptionAttr(p.VehicleType));
+                    break;
+                case "vehicletype_desc":
+                    list = list.OrderByDescending(p => EnumHelper.GetDescriptionAttr(p.VehicleType));
+                    break;
+                case "fee_asc":
+                    list = list.OrderBy(p => p.Fee);
+                    break;
+                case "fee_desc":
+                    list = list.OrderByDescending(p => p.Fee);
+                    break;
+                default:
+                    list = list.OrderBy(p => p.Label);
+                    break;
+            }
+
+            return list;
+        }
+
+        // GET: ParkingSpots
+        public ActionResult Index(string sortOrder, bool filterAvailableOnly = false)
+        {
+            IEnumerable<ParkingSpot> parkingSpots = null;
+
             if (filterAvailableOnly)
-                return View(db.AvailableParkingSpots());
+                parkingSpots = db.AvailableParkingSpots();
             else
-                return View(db.ParkingSpots());
+                parkingSpots = db.ParkingSpots();
+
+            return View(Sort(parkingSpots, sortOrder));
         }
 
         // GET: ParkingSpots/Details/5
@@ -47,43 +91,12 @@ namespace MVCGarage.Controllers
             return View(viewModel);
         }
 
-        //// POST: ParkingSpots/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot,
-        //                           string originActionName,
-        //                           string originControllerName,
-        //                           int selectedVehicleId,
-        //                           ETypeVehicle vehicleType)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (vehicleType != ETypeVehicle.undefined)
-        //            parkingSpot.VehicleType = vehicleType;
-
-        //        db.Add(parkingSpot);
-        //        return RedirectToAction(originActionName,
-        //                                originControllerName,
-        //                                new SelectAParkingSpotVM
-        //                            {
-        //                                VehicleID = selectedVehicleId,
-        //                                ParkingSpotID = parkingSpot.ID
-        //                            });
-        //    }
-
-        //    ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
-
-        //    return View(parkingSpot);
-        //}
-
         // POST: ParkingSpots/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot)
+        public ActionResult Create([Bind(Include = "ID,VehicleID,Label,Fee,VehicleType")] ParkingSpot parkingSpot)
         {
             if (ModelState.IsValid)
             {
@@ -118,7 +131,7 @@ namespace MVCGarage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot)
+        public ActionResult Edit([Bind(Include = "ID,VehicleID,Label,Fee,VehicleType")] ParkingSpot parkingSpot)
         {
             if (ModelState.IsValid)
             {

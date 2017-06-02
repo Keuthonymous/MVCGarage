@@ -10,19 +10,26 @@
 </div>
 
 <p style="font-size: 2em; text-align: center;">
-    @Html.ActionLink("Park a car", "Create")
+    @Html.ActionLink("Create a new parking spot", "Create")
 </p>
+
 <div class="index-table">
     <table>
         <tr>
             <th>
-                @Html.DisplayName("Available?")
+                @{string htmlName = @Html.DisplayNameFor(model => model.Label).ToHtmlString();}
+                @Html.ActionLink(htmlName, "Index", new { sortOrder = ViewBag.LabelSortParam })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Label)
+                @Html.ActionLink("Available?", "Index", new { sortOrder = ViewBag.AvailableSortParam })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VehicleType)
+                @{htmlName = @Html.DisplayNameFor(model => model.VehicleType).ToHtmlString();}
+                @Html.ActionLink(htmlName, "Index", new { sortOrder = ViewBag.VehicleTypeSortParam })
+            </th>
+            <th>
+                @{htmlName = @Html.DisplayNameFor(model => model.Fee).ToHtmlString();}
+                @Html.ActionLink(htmlName, "Index", new { sortOrder = ViewBag.FeeSortParam })
             </th>
             <th></th>
         </tr>
@@ -31,8 +38,11 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Label)
+                </td>
+                <td>
                     @if (item.VehicleID == null)
-                {
+                    {
                         @Html.DisplayName("Yes")
                     }
                     else
@@ -41,15 +51,23 @@
                     }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Label)
-                </td>
-                <td>
                     @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.VehicleType))
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    @Html.DisplayFor(modelItem => item.Fee)/min.
+                </td>
+                <td>
+                    @if (item.VehicleID == null)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                        <text> | </text>
+                    }
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                    @if (item.VehicleID == null)
+                    {
+                        <text> | @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </text>
+                    }
                 </td>
             </tr>
         }

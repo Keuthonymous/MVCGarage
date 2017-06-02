@@ -1,6 +1,7 @@
 ﻿using MVCGarage.Models;
 using MVCGarage.Repositories;
 using MVCGarage.ViewModels.Garage;
+using MVCGarage.ViewModels.Shared;
 using MVCGarage.ViewModels.Vehicles;
 using System.Net;
 using System.Web.Mvc;
@@ -11,11 +12,11 @@ namespace MVCGarage.Controllers
     {
         private VehicleRepository db = new VehicleRepository();
 
-        // GET: Vehicles
-        public ActionResult Index()
-        {
-            return View(db.GetAllVehicles());
-        }
+        //// GET: Vehicles
+        //public ActionResult Index()
+        //{
+        //    return View(db.Vehicles());
+        //}
 
         // GET: Vehicles/Details/5
         public ActionResult Details(int? id)
@@ -48,17 +49,17 @@ namespace MVCGarage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,VehicleType,Owner,Fee,RegistrationPlate,CheckInTime,CheckOutTime,ParkingSpot")] Vehicle vehicle,
+        public ActionResult Create([Bind(Include = "ID,VehicleType,Owner,RegistrationPlate,CheckInTime,ParkingSpot")] Vehicle vehicle,
                                    string originActionName,
                                    string originControllerName,
-                                   bool checkInVehicle)
+                                   EActionType actionType)
         {
             if (ModelState.IsValid)
             {
                 db.Add(vehicle);
                 return RedirectToAction(originActionName, originControllerName, new SelectAVehicleVM
                 {
-                    CheckInVehicle = checkInVehicle,
+                    ActionType = actionType,
                     VehicleID = vehicle.ID
                 });
             }
@@ -70,7 +71,7 @@ namespace MVCGarage.Controllers
                 Vehicle = vehicle,
                 OriginControllerName = originControllerName,
                 OriginActionName = originActionName,
-                CheckInVehicle = checkInVehicle
+                ActionType = actionType
             });
         }
 
@@ -94,7 +95,7 @@ namespace MVCGarage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,VehicleType,Owner,Fee,RegistrationPlate,CheckInTime,CheckOutTime,ParkingSpot")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "ID,VehicleType,Owner,RegistrationPlate,CheckInTime,ParkingSpot")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {

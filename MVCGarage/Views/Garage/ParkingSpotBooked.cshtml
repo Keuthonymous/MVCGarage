@@ -11,39 +11,30 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Vehicle.VehicleType)
-            </dt>
-            <dd>
+                @Html.DisplayNameFor(model => model.Vehicle.VehicleType):
                 @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.Vehicle.VehicleType))
-            </dd>
+            </dt>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate)
-            </dt>
-            <dd>
+                @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate):
                 @Html.DisplayFor(model => model.Vehicle.RegistrationPlate)
-            </dd>
+            </dt>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Vehicle.Owner)
-            </dt>
-            <dd>
+                @Html.DisplayNameFor(model => model.Vehicle.Owner):
                 @Html.DisplayFor(model => model.Vehicle.Owner)
-            </dd>
+            </dt>
         </dl>
     </div>
 
     <div>
         <hr />
-        <h2>Parking Spot</h2>
+        <h4>Parking Spot</h4>
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.ParkingSpot.Label)
-            </dt>
-
-            <dd>
+                @Html.DisplayNameFor(model => model.ParkingSpot.Label):
                 @Html.DisplayFor(model => model.ParkingSpot.Label)
-            </dd>
+            </dt>
         </dl>
     </div>
     <br />

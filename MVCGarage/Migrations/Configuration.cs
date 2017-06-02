@@ -16,21 +16,21 @@ namespace MVCGarage.Migrations
         protected override void Seed(MVCGarage.DataAccess.GarageContext context)
         {
             context.ParkingSpots.AddOrUpdate(p => p.ID,
-                new ParkingSpot { Label = "101", VehicleType = ETypeVehicle.car },
-                new ParkingSpot { Label = "102", VehicleType = ETypeVehicle.car },
-                new ParkingSpot { Label = "103", VehicleType = ETypeVehicle.motorcycle },
-                new ParkingSpot { Label = "104", VehicleType = ETypeVehicle.motorcycle },
-                new ParkingSpot { Label = "201", VehicleType = ETypeVehicle.truck },
-                new ParkingSpot { Label = "202", VehicleType = ETypeVehicle.bus });
+                new ParkingSpot { Label = "101", VehicleType = ETypeVehicle.car, Fee = 0.20 },
+                new ParkingSpot { Label = "102", VehicleType = ETypeVehicle.car, Fee = 0.20 },
+                new ParkingSpot { Label = "103", VehicleType = ETypeVehicle.motorcycle, Fee = 0.50 },
+                new ParkingSpot { Label = "104", VehicleType = ETypeVehicle.motorcycle, Fee = 0.50 },
+                new ParkingSpot { Label = "201", VehicleType = ETypeVehicle.truck, Fee = 0.80 },
+                new ParkingSpot { Label = "202", VehicleType = ETypeVehicle.bus, Fee = 1.00 });
 
             context.Vehicles.AddOrUpdate(v => v.ID,
-                new Vehicle { RegistrationPlate = "ABC123", VehicleType = ETypeVehicle.car, Fee = 0.20, Owner = "Owner" },
-                new Vehicle { RegistrationPlate = "ABC124", VehicleType = ETypeVehicle.car, Fee = 0.20, Owner = "Owner Two" },
-                new Vehicle { RegistrationPlate = "ABC125", VehicleType = ETypeVehicle.motorcycle, Fee = 0.50, Owner = "Owner Three" },
-                new Vehicle { RegistrationPlate = "ABC126", VehicleType = ETypeVehicle.motorcycle, Fee = 0.50, Owner = "Owner Four" },
-                new Vehicle { RegistrationPlate = "ABC127", VehicleType = ETypeVehicle.car, Fee = 0.20, Owner = "Owner Five" },
-                new Vehicle { RegistrationPlate = "ABC128", VehicleType = ETypeVehicle.truck, Fee = 0.80, Owner = "Owner Six" },
-                new Vehicle { RegistrationPlate = "ABC129", VehicleType = ETypeVehicle.bus, Fee = 1.00, Owner = "Owner Seven" });
+                new Vehicle { RegistrationPlate = "ABC123", VehicleType = ETypeVehicle.car, Owner = "Owner" },
+                new Vehicle { RegistrationPlate = "ABC124", VehicleType = ETypeVehicle.car, Owner = "Owner Two" },
+                new Vehicle { RegistrationPlate = "ABC125", VehicleType = ETypeVehicle.motorcycle, Owner = "Owner Three" },
+                new Vehicle { RegistrationPlate = "ABC126", VehicleType = ETypeVehicle.motorcycle, Owner = "Owner Four" },
+                new Vehicle { RegistrationPlate = "ABC127", VehicleType = ETypeVehicle.car, Owner = "Owner Five" },
+                new Vehicle { RegistrationPlate = "ABC128", VehicleType = ETypeVehicle.truck, Owner = "Owner Six" },
+                new Vehicle { RegistrationPlate = "ABC129", VehicleType = ETypeVehicle.bus, Owner = "Owner Seven" });
 
             //  This method will be called after migrating to the latest version.
 

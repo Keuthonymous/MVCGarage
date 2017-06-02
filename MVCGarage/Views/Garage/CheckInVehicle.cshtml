@@ -15,14 +15,13 @@
                      "Vehicles",
                      new MVCGarage.ViewModels.Vehicles.CreateVehicleVM
                      {
-                         OriginActionName = "SelectAVehicle",
+                         OriginActionName = "CheckInVehicle",
                          OriginControllerName = "Garage",
-                         ActionType = Model.ActionType
                      },
                      null)
 </p>
 
-@using (@Html.BeginForm("SelectAParkingSpot", "Garage", FormMethod.Get))
+@using (@Html.BeginForm())
 {
     @Html.Partial("_SelectAVehiclePartial", Model)
 }
