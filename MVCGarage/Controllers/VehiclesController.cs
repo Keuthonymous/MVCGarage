@@ -77,6 +77,9 @@ namespace MVCGarage.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+
             return View(vehicle);
         }
 
@@ -90,7 +93,7 @@ namespace MVCGarage.Controllers
             if (ModelState.IsValid)
             {
                 db.Edit(vehicle);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             return View(vehicle);
         }
