@@ -247,6 +247,11 @@ namespace MVCGarage.Controllers
         public ActionResult VehicleCheckedIn(SelectAParkingSpotVM viewModel)
         {
             // Check in the vehicle ID to the parking spot
+            ParkingSpot parkingSpot = parkingSpots.ParkingSpot(viewModel.ParkingSpotID);
+
+            if (parkingSpot == null)
+                return RedirectToAction("CheckInAVehicle", new { vehicleId = viewModel.VehicleID });
+
             parkingSpots.CheckIn(viewModel.ParkingSpotID, viewModel.VehicleID);
             vehicles.CheckIn(viewModel.VehicleID, viewModel.ParkingSpotID);
 

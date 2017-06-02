@@ -72,7 +72,7 @@
                         {
                             if (bookedParkingSpot == null)
                             {
-                                @Html.ActionLink("Check in", "CheckInAVehicle", new { vehicleId = item.ID })
+                                @Html.ActionLink("Check in", "CheckInAVehicle", "Garage", new { vehicleId = item.ID }, null)
                             }
                             else
                             {
@@ -87,7 +87,7 @@
                         }
                         else
                         {
-                            @Html.ActionLink("Check out", "CheckOutVehicle", "Garage", new { vehicleId = item.ID })
+                            @Html.ActionLink("Check out", "CheckOutAVehicle", "Garage", new { vehicleId = item.ID })
                         }
                         | @Html.ActionLink("Details", "Details", "Vehicles", new { id = item.ID }, null)
                         @if (bookedParkingSpot == null && parkingSpot == null)
