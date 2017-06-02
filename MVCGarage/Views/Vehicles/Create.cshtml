@@ -14,6 +14,7 @@
 {
     originActionName = Model.OriginActionName,
     originControllerName = Model.OriginControllerName,
+    displayCheckInTime = Model.DisplayCheckInTime
 }))
 {
     @Html.AntiForgeryToken()
@@ -33,7 +34,7 @@
             </div>
         </div>
 
-        <hr style="width: 50%; margin-left: 3.5em;"/>
+        <hr style="width: 50%; margin-left: 3.5em;" />
 
         <div class="form-group">
             @Html.LabelFor(model => model.Vehicle.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -43,7 +44,7 @@
             </div>
         </div>
 
-        <hr style="width: 50%; margin-left: 3.5em;"/>
+        <hr style="width: 50%; margin-left: 3.5em;" />
 
         <div class="form-group">
             @Html.LabelFor(model => model.Vehicle.RegistrationPlate, htmlAttributes: new { @class = "control-label col-md-2" })

@@ -1,0 +1,73 @@
+﻿@model MVCGarage.ViewModels.Vehicles.SelectAVehicleVM
+
+@using (@Html.BeginForm())
+{
+    <div class="container">
+        <div class="index-table">
+            <table>
+                <tr>
+                    <th>
+                        @* Blank for the radiobutton *@
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Vehicles.First().RegistrationPlate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Vehicles.First().Owner)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Vehicles.First().VehicleType)
+                    </th>
+                    @if (Model.DisplayCheckInTime)
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.Vehicles.First().CheckInTime)
+                        </th>
+                    }
+                </tr>
+
+                @foreach (var item in Model.Vehicles)
+                {
+                    <tr>
+                        <td>
+                            @if (Model.VehicleID == item.ID)
+                            {
+                                @Html.RadioButtonFor(modelItem => Model.VehicleID, item.ID, new { @autofocus = "autofocus", Checked = "checked" })
+                            }
+                            else
+                            {
+                                @Html.RadioButtonFor(modelItem => Model.VehicleID, item.ID)
+                            }
+                            @Html.HiddenFor(modelItem => item.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegistrationPlate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Owner)
+                        </td>
+                        <td>
+                            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.VehicleType))
+                        </td>
+                        @if (Model.DisplayCheckInTime)
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CheckInTime)
+                            </td>
+                        }
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+
+    <div class="body-text">
+        <input name="submit-button"
+               type="submit"
+               style="font-weight:bold;margin:20px auto; text-align: center; display:block"
+               value="Choose the selected vehicle"
+               class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "Index", "Home", new { style = "display: block; text-align: center;" })
+    </div>
+}

@@ -1,4 +1,4 @@
-﻿@model MVCGarage.ViewModels.Garage.SelectAVehicleVM
+﻿@model MVCGarage.ViewModels.Vehicles.SelectAVehicleVM
 
 @{
     ViewBag.Title = "Check In A Vehicle";
@@ -12,13 +12,11 @@
 <p style="font-size: 3em; text-align: center; color: white;">
     @Html.ActionLink("Add a new vehicle",
                      "Create",
-                     "Vehicles",
                      new MVCGarage.ViewModels.Vehicles.CreateVehicleVM
                      {
                          OriginActionName = "CheckInVehicle",
-                         OriginControllerName = "Garage",
-                     },
-                     null)
+                         OriginControllerName = "Vehicles",
+                     })
 </p>
 
 @using (@Html.BeginForm())
