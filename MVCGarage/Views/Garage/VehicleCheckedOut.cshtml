@@ -51,51 +51,64 @@
 
     <hr />
     <h2>Parking spot</h2>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ParkingSpot.Label)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ParkingSpot.Label)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ParkingSpot.Fee)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ParkingSpot.Fee)/min.
-        </dd>
-    </dl>
+    <div class="index-table">
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkingSpot.Label)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkingSpot.Fee)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.ParkingSpot.Label)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.ParkingSpot.Fee)/min.
+                </td>
+            </tr>
+        </table>
+    </div>
 
     <hr />
     <h4>Total amount</h4>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayName("Check in time:")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => Model.CheckInTime)
-        </dd>
-        <dt>
-            @Html.DisplayName("Check out time:")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => Model.CheckOutTime)
-        </dd>
-        <dt>
-            @Html.DisplayName("Total time:")
-        </dt>
-        <dd>
-            @Html.DisplayName(TimeSpan.FromMinutes(Model.NbMinutes).ToString())
-        </dd>
-        <dt>
-            @Html.DisplayName("Total amount:")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => Model.NbMinutes) *
-            @Html.DisplayFor(model => Model.ParkingSpot.Fee) =
-            @Html.DisplayName(string.Format("{0:N2}", Model.TotalAmount))
-        </dd>
-    </dl>
+    <div class="index-table">
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayName("Check in time:")
+                </th>
+                <th>
+                    @Html.DisplayName("Check out time:")
+                </th>
+                <th>
+                    @Html.DisplayName("Total time:")
+                </th>
+                <th>
+                    @Html.DisplayName("Total amount:")
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => Model.CheckInTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => Model.CheckOutTime)
+                </td>
+                <td>
+                    @Html.DisplayName(TimeSpan.FromMinutes(Model.NbMinutes).ToString())
+                </td>
+                <td>
+                    @Html.DisplayFor(model => Model.NbMinutes) *
+                    @Html.DisplayFor(model => Model.ParkingSpot.Fee) =
+                    @Html.DisplayName(string.Format("{0:N2}", Model.TotalAmount))
+                </td>
+
+            </tr>
+        </table>
+    </div>
 </div>
 
 <p>

@@ -1,6 +1,5 @@
 ﻿@model MVCGarage.ViewModels.Garage.SelectAVehicleVM
 
-@*@using (@Html.BeginForm("SelectAVehicle", "Garage", FormMethod.Get))*@
 @using (@Html.BeginForm())
 {
     <div class="container">
@@ -58,6 +57,5 @@
                value="Choose the selected vehicle"
                class="btn btn-default" /> |
         @Html.ActionLink("Back to List", "Index", "ParkingSpots", new { style = "display: block; text-align: center;" })
-        @Html.HiddenFor(model => Model.ActionType)
     </div>
 }

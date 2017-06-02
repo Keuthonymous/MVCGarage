@@ -13,7 +13,15 @@
         </div>
 
         <p style="color: white; text-align: center; font-size: 2em;">
-            @Html.ActionLink("Register a new Vehicle", "Create")
+            @Html.ActionLink("Register a new Vehicle",
+                             "Create",
+                             "Vehicles",
+                             new MVCGarage.ViewModels.Vehicles.CreateVehicleVM
+                             {
+                                 OriginActionName = Model.ViewName,
+                                 OriginControllerName = "Garage"
+                             },
+                             null)
         </p>
 
         @{if (Model.Vehicles.Count() == 0)

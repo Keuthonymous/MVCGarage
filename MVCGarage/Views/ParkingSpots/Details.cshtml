@@ -1,13 +1,13 @@
 ﻿@model MVCGarage.Models.ParkingSpot
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Parking spot details";
 }
 
 <div class="header jumbotron">
     <h2>Details</h2>
     <hr />
-    <p>View the details of your selected vehicle</p>
+    <p>View the details of the parking spot</p>
 </div>
 
 <div class="jumbotron" style="color: white; font-size: 1.35em;">
@@ -20,14 +20,6 @@
 
         <dd>
             @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VehicleID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VehicleID)
         </dd>
 
         <dt>

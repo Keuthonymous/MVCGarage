@@ -106,7 +106,7 @@ namespace MVCGarage.Controllers
 
             ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
 
-            return View(parkingSpot);
+            return View(new CreateParkingSpotsVM { ParkingSpot = parkingSpot });
         }
 
         // GET: ParkingSpots/Edit/5

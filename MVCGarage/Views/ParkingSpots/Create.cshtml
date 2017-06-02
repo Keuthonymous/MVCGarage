@@ -11,13 +11,7 @@
 </div>
 
 
-@using (Html.BeginForm(new
-{
-    originActionName = Model.OriginActionName,
-    originControllerName = Model.OriginControllerName,
-    selectedVehicleId = Model.SelectedVehicleId,
-    vehicleType = Model.VehicleType
-}))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -30,15 +24,15 @@
             <div class="col-md-10">
                 @{if (Model.VehicleType == MVCGarage.Models.ETypeVehicle.undefined)
                 {
-                        @Html.DropDownListFor(model => model.VehicleType,
+                    @Html.DropDownListFor(model => model.ParkingSpot.VehicleType,
                                (IEnumerable<SelectListItem>)ViewBag.SelectVehicleTypes,
                                       htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.VehicleType, "", new { @class = "text-danger" })
-                    }
-                    else
-                    {
-                        @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
-                    }
+                    @Html.ValidationMessageFor(model => model.ParkingSpot.VehicleType, "", new { @class = "text-danger" })
+                }
+                else
+                {
+                    @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
+                }
                 }
             </div>
         </div>
@@ -80,10 +74,10 @@
             </div>
         </div>
     </div>
-                    }
+}
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", "Home")
 </div>
 
 @section Scripts {

@@ -1,7 +1,6 @@
 ﻿using MVCGarage.Models;
 using MVCGarage.Repositories;
 using MVCGarage.ViewModels.Garage;
-using MVCGarage.ViewModels.Shared;
 using MVCGarage.ViewModels.Vehicles;
 using System.Net;
 using System.Web.Mvc;
@@ -11,12 +10,6 @@ namespace MVCGarage.Controllers
     public class VehiclesController : Controller
     {
         private VehicleRepository db = new VehicleRepository();
-
-        //// GET: Vehicles
-        //public ActionResult Index()
-        //{
-        //    return View(db.Vehicles());
-        //}
 
         // GET: Vehicles/Details/5
         public ActionResult Details(int? id)
@@ -51,15 +44,13 @@ namespace MVCGarage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,VehicleType,Owner,RegistrationPlate,CheckInTime,ParkingSpot")] Vehicle vehicle,
                                    string originActionName,
-                                   string originControllerName,
-                                   EActionType actionType)
+                                   string originControllerName)
         {
             if (ModelState.IsValid)
             {
                 db.Add(vehicle);
                 return RedirectToAction(originActionName, originControllerName, new SelectAVehicleVM
                 {
-                    ActionType = actionType,
                     VehicleID = vehicle.ID
                 });
             }
@@ -71,7 +62,6 @@ namespace MVCGarage.Controllers
                 Vehicle = vehicle,
                 OriginControllerName = originControllerName,
                 OriginActionName = originActionName,
-                ActionType = actionType
             });
         }
 
