@@ -76,7 +76,14 @@
                         @Html.DisplayFor(modelItem => item.Label)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Fee)/min.
+                        @if (Model.CheckIn)
+                        {
+                            @Html.DisplayFor(modelItem => item.Fee)<text>/min.</text>
+                        }
+                        else
+                        {
+                            @Html.DisplayName(string.Format("{0:N2}", item.MonthlyFee()))<text>/month</text>
+                        }
                     </td>
                 </tr>
             }

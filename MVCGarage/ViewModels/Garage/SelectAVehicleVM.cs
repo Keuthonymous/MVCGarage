@@ -1,5 +1,4 @@
 ﻿using MVCGarage.Models;
-using MVCGarage.ViewModels.Shared;
 using System.Collections.Generic;
 
 namespace MVCGarage.ViewModels.Garage
@@ -11,7 +10,5 @@ namespace MVCGarage.ViewModels.Garage
 
         public string FollowingActionName { get; set; }
         public string FollowingControllerName { get; set; }
-
-        public EActionType ActionType { get; set; }
     }
 }

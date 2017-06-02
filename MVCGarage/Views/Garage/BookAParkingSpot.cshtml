@@ -1,12 +1,12 @@
 ﻿@model MVCGarage.ViewModels.Garage.SelectAVehicleVM
 
 @{
-    ViewBag.Title = "Select A Vehicle";
+    ViewBag.Title = "Book A Parking Spot";
 }
 <div class="header jumbotron">
-    <h1>Please select a vehicle to @ViewBag.ActionName</h1>
+    <h1>Please select a vehicle you want to book a parking spot for</h1>
     <hr />
-    <p>This is where you select the vehicle you would like to @ViewBag.ActionName</p>
+    <p>This is where you select the vehicle you would like to parking book a spot for</p>
 </div>
 
 <p style="font-size: 3em; text-align: center; color: white;">
@@ -15,14 +15,13 @@
                      "Vehicles",
                      new MVCGarage.ViewModels.Vehicles.CreateVehicleVM
                      {
-                         OriginActionName = "SelectAVehicle",
+                         OriginActionName = "BookAParkingSpot",
                          OriginControllerName = "Garage",
-                         ActionType = Model.ActionType
                      },
                      null)
 </p>
 
-@using (@Html.BeginForm("SelectAParkingSpot", "Garage", FormMethod.Get))
+@using (@Html.BeginForm())
 {
     @Html.Partial("_SelectAVehiclePartial", Model)
 }

@@ -1,5 +1,4 @@
 ﻿using MVCGarage.Models;
-using MVCGarage.ViewModels.Shared;
 using System.Collections.Generic;
 
 namespace MVCGarage.ViewModels.Garage
@@ -11,10 +10,9 @@ namespace MVCGarage.ViewModels.Garage
 
         public IEnumerable<ParkingSpot> ParkingSpots { get; set; }
         public int ParkingSpotID { get; set; }
+        public bool CheckIn { get; set; }
 
         public string FollowingActionName { get; set; }
         public string FollowingControllerName { get; set; }
-
-        public EActionType ActionType { get; set; }
     }
 }
