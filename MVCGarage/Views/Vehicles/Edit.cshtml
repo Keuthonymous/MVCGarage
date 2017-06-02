@@ -4,15 +4,18 @@
     ViewBag.Title = "Edit a vehicle";
 }
 
-<h2>Edit a vehicle</h2>
-
+<div class="header jumbotron">
+    <h1>Edit a vehicle</h1>
+    <hr />
+    <p>This is where you can edit a Vehicle</p>
+</div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Vehicle</h4>
+    <div class="form-horizontal jumbotron" style="color: white;">
+        <h2 style="text-align: center;">Vehicle</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
@@ -27,6 +30,8 @@
             </div>
         </div>
 
+        <hr style="width: 50%; margin-left: 3em;" />
+
         <div class="form-group">
             @Html.LabelFor(model => model.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -35,18 +40,13 @@
             </div>
         </div>
 
+        <hr style="width: 50%; margin-left: 3em;" />
+
         <div class="form-group">
             @Html.LabelFor(model => model.RegistrationPlate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.RegistrationPlate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.RegistrationPlate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CheckInTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.CheckInTime)
             </div>
         </div>
 
@@ -58,7 +58,7 @@
     </div>
 }
 
-<div>
+<div style="text-align: center; display: block; font-size: 2em; margin-bottom: 3em;">
     @Html.ActionLink("Back to List", "Index", "Home")
 </div>
 
