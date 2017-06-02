@@ -3,13 +3,12 @@
     ViewBag.Title = "Check out a vehicle";
 }
 
-<div class="header">
+<div class="header jumbotron">
     <h2>Your vehicle has successfully been checked out</h2>
 </div>
 
 <div class="about-body-text" style="color: white; margin-top: 10em; text-align: center;">
-    <hr />
-    <h4>Vehicle</h4>
+    <h2>Vehicle</h2>
     <div class="index-table">
         <table>
             <tr>
@@ -51,7 +50,7 @@
     </div>
 
     <hr />
-    <h4>Parking spot</h4>
+    <h2>Parking spot</h2>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ParkingSpot.Label)

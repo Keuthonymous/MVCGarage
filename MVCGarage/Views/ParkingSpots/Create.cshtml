@@ -4,7 +4,11 @@
     ViewBag.Title = "Create a new parking spot";
 }
 
-<h2>Create</h2>
+<div class="header jumbotron">
+    <h1>Create a parking spot</h1>
+    <hr />
+    <p>This is where you can create a new parking spot</p>
+</div>
 
 
 @using (Html.BeginForm(new
@@ -17,8 +21,8 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>ParkingSpot</h4>
+    <div class="form-horizontal about-body-text" style="color: white; font-size: 1em;">
+        <h2 style="text-align:center;">ParkingSpot</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -26,18 +30,20 @@
             <div class="col-md-10">
                 @{if (Model.VehicleType == MVCGarage.Models.ETypeVehicle.undefined)
                 {
-                    @Html.DropDownListFor(model => model.VehicleType,
+                        @Html.DropDownListFor(model => model.VehicleType,
                                (IEnumerable<SelectListItem>)ViewBag.SelectVehicleTypes,
                                       htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.VehicleType, "", new { @class = "text-danger" })
-                }
-                else
-                {
-                    @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
-                }
+                        @Html.ValidationMessageFor(model => model.VehicleType, "", new { @class = "text-danger" })
+                    }
+                    else
+                    {
+                        @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
+                    }
                 }
             </div>
         </div>
+
+        <hr />
 
         <div class="form-group">
             @Html.LabelFor(model => model.ParkingSpot.Label, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -56,6 +62,8 @@
             </div>
         </div>
 
+        <hr />
+
         <div class="form-group">
             @Html.LabelFor(model => model.ParkingSpot.Fee, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -72,7 +80,7 @@
             </div>
         </div>
     </div>
-}
+                    }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
