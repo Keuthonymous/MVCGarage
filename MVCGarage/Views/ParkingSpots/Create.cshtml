@@ -4,15 +4,19 @@
     ViewBag.Title = "Create a new parking spot";
 }
 
-<h2>Create</h2>
+<div class="header jumbotron">
+    <h1>Create a parking spot</h1>
+    <hr />
+    <p>This is where you can create a new parking spot</p>
+</div>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>ParkingSpot</h4>
+    <div class="form-horizontal about-body-text" style="color: white; font-size: 1em;">
+        <h2 style="text-align:center;">ParkingSpot</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -33,6 +37,8 @@
             </div>
         </div>
 
+        <hr />
+
         <div class="form-group">
             @Html.LabelFor(model => model.ParkingSpot.Label, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -49,6 +55,8 @@
                 @Html.ValidationMessageFor(model => model.ParkingSpot.Label, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <hr />
 
         <div class="form-group">
             @Html.LabelFor(model => model.ParkingSpot.Fee, htmlAttributes: new { @class = "control-label col-md-2" })
