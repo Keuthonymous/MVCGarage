@@ -174,12 +174,12 @@
     <Compile Include="ViewModels\Garage\DisplayVehiclesVM.cs" />
     <Compile Include="ViewModels\Garage\SelectAParkingSpotVM.cs" />
     <Compile Include="ViewModels\Garage\BookedParkingSpotVM.cs" />
-    <Compile Include="ViewModels\Garage\SelectAVehicleVM.cs" />
     <Compile Include="ViewModels\Garage\VehicleCheckedInVM.cs" />
     <Compile Include="ViewModels\Garage\VehicleCheckedOutVM.cs" />
     <Compile Include="ViewModels\ParkingSpots\CreateParkingSpotsVM.cs" />
     <Compile Include="ViewModels\ParkingSpots\EditParkingSpotVM.cs" />
     <Compile Include="ViewModels\Vehicles\CreateVehicleVM.cs" />
+    <Compile Include="ViewModels\Vehicles\SelectAVehicleVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Garage.mdf" />
@@ -239,14 +239,15 @@
     <Content Include="Views\Garage\SelectAParkingSpot.cshtml" />
     <Content Include="Views\Garage\ParkingSpotBooked.cshtml" />
     <Content Include="Views\Garage\VehicleCheckedIn.cshtml" />
-    <Content Include="Views\Garage\CheckInVehicle.cshtml" />
     <Content Include="Views\Garage\DisplayAllVehicles.cshtml" />
     <Content Include="Views\Garage\DisplayParkedVehicles.cshtml" />
     <Content Include="Views\Garage\_DisplayVehiclesPartial.cshtml" />
     <Content Include="Views\Garage\_SelectAVehiclePartial.cshtml" />
     <Content Include="Views\Garage\VehicleCheckedOut.cshtml" />
     <Content Include="Views\Garage\BookAParkingSpot.cshtml" />
-    <Content Include="Views\Garage\CheckOutVehicle.cshtml" />
+    <Content Include="Views\Vehicles\CheckOutVehicle.cshtml" />
+    <Content Include="Views\Vehicles\_SelectAVehiclePartial.cshtml" />
+    <Content Include="Views\Vehicles\CheckInVehicle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705300821100_Initial.resx">

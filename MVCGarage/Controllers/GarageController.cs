@@ -1,6 +1,7 @@
 ﻿using MVCGarage.Models;
 using MVCGarage.Repositories;
 using MVCGarage.ViewModels.Garage;
+using MVCGarage.ViewModels.Vehicles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +16,17 @@ namespace MVCGarage.Controllers
 
         private IEnumerable<Vehicle> Sort(IEnumerable<Vehicle> list, string sortOrder)
         {
-            ViewBag.VehicleIDSortParam = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
-            ViewBag.VehicleTypeSortParam = sortOrder == "vehicletype_asc" ? "vehicletype_desc" : "vehicletype_asc";
+            ViewBag.RegistrationPlateSortParam = String.IsNullOrEmpty(sortOrder) ? "regnum_desc" : "regnum_asc";
             ViewBag.OwnerSortParam = sortOrder == "owner_asc" ? "owner_desc" : "owner_asc";
-            ViewBag.RegistrationPlateSortParam = sortOrder == "regnum_asc" ? "regnum_desc" : "regnum_asc";
+            ViewBag.VehicleTypeSortParam = sortOrder == "vehicletype_asc" ? "vehicletype_desc" : "vehicletype_asc";
             ViewBag.CheckInTimeSortParam = sortOrder == "checkin_asc" ? "checkin_desc" : "checkin_asc";
             ViewBag.ParkingSpotSortParam = sortOrder == "spot_asc" ? "spot_desc" : "spot_asc";
             ViewBag.FeeSortParam = sortOrder == "fee_asc" ? "fee_desc" : "fee_asc";
 
             switch (sortOrder)
             {
-                case "id_desc":
-                    list = list.OrderByDescending(v => v.ID);
+                case "regnum_desc":
+                    list = list.OrderByDescending(v => v.RegistrationPlate);
                     break;
                 case "vehicletype_asc":
                     list = list.OrderBy(v => EnumHelper.GetDescriptionAttr(v.VehicleType));
@@ -39,12 +39,6 @@ namespace MVCGarage.Controllers
                     break;
                 case "owner_desc":
                     list = list.OrderByDescending(v => v.Owner);
-                    break;
-                case "regnum_asc":
-                    list = list.OrderBy(v => v.RegistrationPlate);
-                    break;
-                case "regnum_desc":
-                    list = list.OrderByDescending(v => v.RegistrationPlate);
                     break;
                 case "checkin_asc":
                     list = list.OrderBy(v => DateTime.Equals(v.CheckInTime, null)).ThenBy(v => v.CheckInTime);
@@ -77,7 +71,7 @@ namespace MVCGarage.Controllers
                            .Select(v_p => v_p.Vehicle);
                     break;
                 default:
-                    list = list.OrderBy(v => v.ID);
+                    list = list.OrderBy(v => v.RegistrationPlate);
                     break;
             }
 
@@ -166,7 +160,11 @@ namespace MVCGarage.Controllers
         {
             // Allows the user to select a vehicle in the list of already exiting vehicles
             // or to create a new one
-            return View(new SelectAVehicleVM { Vehicles = vehicles.UnparkedVehicles() });
+            return View(new SelectAVehicleVM
+            {
+                DisplayCheckInTime = false,
+                Vehicles = vehicles.UnparkedVehicles()
+            });
         }
 
         [HttpPost]
@@ -226,24 +224,6 @@ namespace MVCGarage.Controllers
                 return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
-        public ActionResult CheckInVehicle(SelectAVehicleVM viewModel)
-        {
-            // Allows the user to select a vehicle in the list of already exiting vehicles
-            // or to create a new one
-            return View(new SelectAVehicleVM
-            {
-                Vehicles = vehicles.UnparkedVehicles(),
-                VehicleID = viewModel.VehicleID,
-            });
-        }
-
-        [HttpPost]
-        public ActionResult CheckInVehicle(int vehicleId)
-        {
-            return RedirectToAction("CheckInAVehicle", "Garage", new { vehicleId = vehicleId });
-        }
-
         public ActionResult CheckInAVehicle(int? vehicleId)
         {
             Vehicle vehicle = vehicles.Vehicle(vehicleId);
@@ -278,24 +258,10 @@ namespace MVCGarage.Controllers
             });
         }
 
-        [HttpGet]
-        public ActionResult CheckOutVehicle()
-        {
-            // Allows the user to select a vehicle in the list of already exiting vehicles
-            // or to create a new one
-            return View(new SelectAVehicleVM { Vehicles = vehicles.ParkedVehicles() });
-        }
-
-        [HttpPost]
-        public ActionResult CheckOutVehicle(int? vehicleId)
-        {
-            return RedirectToAction("CheckOutAVehicle", new { vehicleId = vehicleId });
-        }
-
         public ActionResult CheckOutAVehicle(int? vehicleId)
         {
             if (vehicleId == null)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
 
             return RedirectToAction("VehicleCheckedOut", new { vehicleId = vehicleId });
         }

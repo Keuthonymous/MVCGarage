@@ -1,7 +1,7 @@
 ﻿using MVCGarage.Models;
 using System.Collections.Generic;
 
-namespace MVCGarage.ViewModels.Garage
+namespace MVCGarage.ViewModels.Vehicles
 {
     public class SelectAVehicleVM
     {
@@ -10,5 +10,7 @@ namespace MVCGarage.ViewModels.Garage
 
         public string FollowingActionName { get; set; }
         public string FollowingControllerName { get; set; }
+
+        public bool DisplayCheckInTime { get; set; }
     }
 }

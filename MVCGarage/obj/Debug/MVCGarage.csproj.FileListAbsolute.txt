@@ -439,4 +439,3 @@ C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarageMike\MVCGarage\bin\Microsoft.AI.Depe
 C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarageMike\MVCGarage\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarageMike\MVCGarage\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarageMike\MVCGarage\bin\Microsoft.AI.Web.xml
-C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarageMike\MVCGarage\obj\Debug\MVCGarage.csprojResolveAssemblyReference.cache
