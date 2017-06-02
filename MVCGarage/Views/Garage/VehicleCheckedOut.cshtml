@@ -4,11 +4,13 @@
 }
 
 <div class="header jumbotron">
-    <h2>Your vehicle has successfully been checked out</h2>
+    <h1>Check Out</h1>
+    <hr />
+    <p>Your Vehicles has been checked out</p>
 </div>
 
-<div class="about-body-text" style="color: white; margin-top: 10em; text-align: center;">
-    <h2>Vehicle</h2>
+<div style="color: white; margin-top: 10em; text-align: center;">
+    <h2 style="text-align: center;">Vehicle</h2>
     <div class="index-table">
         <table>
             <tr>
@@ -50,7 +52,7 @@
     </div>
 
     <hr />
-    <h2>Parking spot</h2>
+    <h2 style="text-align: center;">Parking spot</h2>
     <div class="index-table">
         <table>
             <tr>
@@ -73,7 +75,7 @@
     </div>
 
     <hr />
-    <h4>Total amount</h4>
+    <h2 style="text-align: center;">Total amount</h2>
     <div class="index-table">
         <table>
             <tr>
@@ -111,6 +113,8 @@
     </div>
 </div>
 
-<p>
-    @Html.ActionLink("Back to List", "DisplayAllVehicles", "Garage")
-</p>
+<div style="text-align: center; display: block; font-size: 2em; margin-bottom: 3em; color: white;">
+    <p>
+        @Html.ActionLink("Back to List", "DisplayAllVehicles", "Garage")
+    </p>
+</div>

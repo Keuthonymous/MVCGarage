@@ -87,7 +87,7 @@
                         }
                         else
                         {
-                            @Html.ActionLink("Check out", "CheckOutAVehicle", new { vehicleId = item.ID })
+                            @Html.ActionLink("Check out", "CheckOutVehicle", "Garage", new { vehicleId = item.ID })
                         }
                         | @Html.ActionLink("Details", "Details", "Vehicles", new { id = item.ID }, null)
                         @if (bookedParkingSpot == null && parkingSpot == null)
