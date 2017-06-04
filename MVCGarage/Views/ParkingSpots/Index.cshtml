@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCGarage.Models.ParkingSpot>
+﻿@model IEnumerable<MVCGarage.ViewModels.ParkingSpots.DetailsParkingSpotVM>
 
 @{
     ViewBag.Title = "Index";
@@ -17,18 +17,18 @@
     <table>
         <tr>
             <th>
-                @{string htmlName = @Html.DisplayNameFor(model => model.Label).ToHtmlString();}
+                @{string htmlName = @Html.DisplayNameFor(model => model.First().ParkingSpot.Label).ToHtmlString();}
                 @Html.ActionLink(htmlName, "Index", new { sortOrder = ViewBag.LabelSortParam })
             </th>
             <th>
                 @Html.ActionLink("Available?", "Index", new { sortOrder = ViewBag.AvailableSortParam })
             </th>
             <th>
-                @{htmlName = @Html.DisplayNameFor(model => model.VehicleType).ToHtmlString();}
+                @{htmlName = @Html.DisplayNameFor(model => model.First().ParkingSpot.VehicleType).ToHtmlString();}
                 @Html.ActionLink(htmlName, "Index", new { sortOrder = ViewBag.VehicleTypeSortParam })
             </th>
             <th>
-                @{htmlName = @Html.DisplayNameFor(model => model.Fee).ToHtmlString();}
+                @{htmlName = @Html.DisplayNameFor(model => model.First().ParkingSpot.Fee).ToHtmlString();}
                 @Html.ActionLink(htmlName, "Index", new { sortOrder = ViewBag.FeeSortParam })
             </th>
             <th></th>
@@ -36,36 +36,71 @@
 
         @foreach (var item in Model)
         {
+            bool available = false;
+            bool parked = false;
+            bool booked = false;
+
+            if (item.Vehicle == null)
+            {
+                available = true;
+            }
+            else if (item.Vehicle.ParkingSpotID == item.ParkingSpot.ID)
+            {
+                parked = true;
+            }
+            else
+            {
+                booked = true;
+            }
+
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Label)
+                    @Html.DisplayFor(modelItem => item.ParkingSpot.Label)
                 </td>
                 <td>
-                    @if (item.VehicleID == null)
+                    @Html.DisplayFor(modelItem=> item.Availability)
+                </td>
+                <td>
+                    @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.ParkingSpot.VehicleType))
+                </td>
+                <td>
+                    @if (available || parked)
                     {
-                        @Html.DisplayName("Yes")
+                        @item.ParkingSpot.DisplayFee();
                     }
-                    else
+                    else if (booked)
                     {
-                        @Html.DisplayName("No")
+                        @item.ParkingSpot.DisplayMonthlyFee();
                     }
                 </td>
                 <td>
-                    @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.VehicleType))
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fee)/min.
-                </td>
-                <td>
-                    @if (item.VehicleID == null)
+                    @if (booked)
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                        @Html.ActionLink("Unbook",
+                                         "UnbookAParkingSpot", 
+                                         "Garage", 
+                                         new { vehicleId = item.ParkingSpot.VehicleID }, 
+                                         null)
                         <text> | </text>
                     }
-                    @Html.ActionLink("Details", "Details", new { id = item.ID })
-                    @if (item.VehicleID == null)
+                    @if (parked)
                     {
-                        <text> | @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        @Html.ActionLink("Check out", 
+                                         "CheckOutAVehicle", 
+                                         "Garage", 
+                                         new { vehicleId = item.ParkingSpot.VehicleID }, 
+                                         null)
+                        <text> | </text>
+                    }
+                    @if (available)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ParkingSpot.ID })
+                        <text> | </text>
+                    }
+                    @Html.ActionLink("Details", "Details", new { id = item.ParkingSpot.ID })
+                    @if (available)
+                    {
+                        <text> | @Html.ActionLink("Delete", "Delete", new { id = item.ParkingSpot.ID })
                         </text>
                     }
                 </td>

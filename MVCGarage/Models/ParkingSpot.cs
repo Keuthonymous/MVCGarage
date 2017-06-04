@@ -15,9 +15,29 @@ namespace MVCGarage.Models
         [Display(Name = "Identifiant")]
         public string Label { get; set; }
 
+        [Display(Name = "Check in time")]
+        public DateTime? CheckInTime { get; set; }
+
         [Display(Name = "Fee")]
-        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
-        public double Fee { get; set; }
+        public double? Fee { get; set; }
+
+        public double GetFee()
+        {
+            if (Fee == null)
+                return 0;
+            else
+                return (double)(Fee);
+        }
+
+        public string DisplayFee()
+        {
+            return string.Format("{0:N2}/min.", GetFee());
+        }
+
+        public string DisplayMonthlyFee()
+        {
+            return string.Format("{0:N2}/month", MonthlyFee());
+        }
 
         [Display(Name = "Reserved vehicle type")]
         public ETypeVehicle VehicleType { get; set; }
@@ -25,15 +45,7 @@ namespace MVCGarage.Models
         [Display(Name = "Monthly fee")]
         public double MonthlyFee()
         {
-            return Math.Round( 70 * 30 * 24 * 60 * Fee / 100, 2, MidpointRounding.AwayFromZero);
-        }
-
-        public string Available()
-        {
-            if (VehicleID == null)
-                return "Yes";
-            else
-                return "No";
+            return Math.Round(70 * 30 * 24 * 60 * GetFee() / 100, 2, MidpointRounding.AwayFromZero);
         }
     }
 }

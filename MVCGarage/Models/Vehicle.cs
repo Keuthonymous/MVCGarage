@@ -18,9 +18,6 @@ namespace MVCGarage.Models
         [Display(Name = "Regitration plate")]
         public string RegistrationPlate { get; set; }
 
-        [Display(Name = "Check in time")]
-        public DateTime? CheckInTime { get; set; }
-
         [Display(Name = "Parking Spot ID")]
         public int? ParkingSpotID { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿using MVCGarage.Models;
 using MVCGarage.Repositories;
-//using MVCGarage.ViewModels.Garage;
+using MVCGarage.ViewModels.ParkingSpots;
 using MVCGarage.ViewModels.Vehicles;
 using System.Net;
 using System.Web.Mvc;
@@ -34,6 +34,9 @@ namespace MVCGarage.Controllers
             if (viewModel.OriginActionName == null)
                 viewModel.OriginActionName = "Index";
 
+            if (viewModel.OriginControllerName == null)
+                viewModel.OriginControllerName = string.Empty;
+
             return View(viewModel);
         }
 
@@ -44,16 +47,30 @@ namespace MVCGarage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,VehicleType,Owner,RegistrationPlate,CheckInTime,ParkingSpot")] Vehicle vehicle,
                                    string originActionName,
-                                   string originControllerName,
-                                   bool displayCheckInTime)
+                                   string originControllerName)
         {
             if (ModelState.IsValid)
             {
+                // Check that the registration plate is still unique
+                if (db.VehicleByRegistrationPlate(vehicle.RegistrationPlate) != null)
+                {
+                    ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+
+                    return View(new CreateVehicleVM
+                    {
+                        Vehicle = vehicle,
+                        OriginControllerName = originControllerName,
+                        OriginActionName = originActionName,
+                        ErrorMessage = "A vehicle with the same registration plate already exists!"
+                    });
+                }
+
+                vehicle.RegistrationPlate = vehicle.RegistrationPlate.ToUpper();
+
                 db.Add(vehicle);
                 return RedirectToAction(originActionName, originControllerName, new SelectAVehicleVM
                 {
-                    VehicleID = vehicle.ID,
-                    DisplayCheckInTime = displayCheckInTime
+                    VehicleID = vehicle.ID
                 });
             }
 
@@ -63,8 +80,7 @@ namespace MVCGarage.Controllers
             {
                 Vehicle = vehicle,
                 OriginControllerName = originControllerName,
-                OriginActionName = originActionName,
-                DisplayCheckInTime = displayCheckInTime
+                OriginActionName = originActionName
             });
         }
 
@@ -126,33 +142,36 @@ namespace MVCGarage.Controllers
         }
 
         [HttpGet]
-        public ActionResult CheckInVehicle(SelectAVehicleVM viewModel)
+        public ActionResult CheckInVehicle(SelectAVehicleVM viewModel, string errorMessage)
         {
             // Allows the user to select a vehicle in the list of already exiting vehicles
             // or to create a new one
             return View(new SelectAVehicleVM
             {
-                DisplayCheckInTime = false,
+                ErrorMessage = errorMessage,
                 Vehicles = db.UnparkedVehicles(),
                 VehicleID = viewModel.VehicleID,
             });
         }
 
         [HttpPost]
-        public ActionResult CheckInVehicle(int vehicleId)
+        public ActionResult CheckInVehicle(int? vehicleId)
         {
-            return RedirectToAction("CheckInAVehicle", "Garage", new { vehicleId = vehicleId });
+            if (vehicleId == null)
+                return RedirectToAction("CheckInVehicle", new { errorMessage = "You must select a vehicle!" });
+            else
+                return RedirectToAction("CheckInAVehicle", "Garage", new { vehicleId = vehicleId });
         }
 
         [HttpGet]
-        public ActionResult CheckOutVehicle()
+        public ActionResult CheckOutVehicle(string errorMessage)
         {
             // Allows the user to select a vehicle in the list of already exiting vehicles
             // or to create a new one
             return View(new SelectAVehicleVM
             {
-                DisplayCheckInTime = true,
-                Vehicles = db.ParkedVehicles()
+                Vehicles = db.ParkedVehicles(),
+                ErrorMessage = errorMessage
             });
         }
 
@@ -160,6 +179,63 @@ namespace MVCGarage.Controllers
         public ActionResult CheckOutVehicle(int? vehicleId)
         {
             return RedirectToAction("CheckOutAVehicle", "Garage", new { vehicleId = vehicleId });
+        }
+
+        // GET: Vehicles/BookAParkingSpot
+        [HttpGet]
+        public ActionResult BookAParkingSpot(string errorMessage)
+        {
+            // Allows the user to select a vehicle in the list of already exiting vehicles
+            // or to create a new one
+            return View(new SelectAVehicleVM
+            {
+                ErrorMessage = errorMessage,
+                Vehicles = db.UnparkedVehicles()
+            });
+        }
+
+        [HttpPost]
+        public ActionResult BookAParkingSpot(int? vehicleId)
+        {
+            return RedirectToAction("BookAParkingSpotForAVehicle", new { vehicleId = vehicleId });
+        }
+
+        public ActionResult BookAParkingSpotForAVehicle(int? vehicleId, string errorMessage)
+        {
+            Vehicle vehicle = db.Vehicle(vehicleId);
+
+            if (vehicle == null)
+                return RedirectToAction("BookAParkingSpot",
+                                        new { errorMessage = "You must select a vehicle!" });
+
+            return RedirectToAction("SelectAParkingSpot",
+                                    "Garage",
+                                    new SelectAParkingSpotVM
+                                    {
+                                        VehicleID = vehicle.ID,
+                                        CheckIn = false,
+                                        ErrorMessage = errorMessage,
+                                        FollowingActionName = "ParkingSpotBooked",
+                                        FollowingControllerName = "Garage"
+                                    });
+        }
+
+        [HttpGet]
+        public ActionResult UnbookParkingSpot(string errorMessage)
+        {
+            // Allows the user to select a vehicle in the list of already exiting vehicles
+            // or to create a new one
+            return View(new SelectAVehicleVM
+            {
+                Vehicles = new GarageController().BookedSpotsVehicles(),
+                ErrorMessage = errorMessage
+            });
+        }
+
+        [HttpPost]
+        public ActionResult UnbookParkingSpot(int? vehicleId)
+        {
+            return RedirectToAction("UnbookAParkingSpot", "Garage", new { vehicleId = vehicleId });
         }
 
         protected override void Dispose(bool disposing)

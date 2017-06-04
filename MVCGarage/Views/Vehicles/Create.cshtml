@@ -8,13 +8,13 @@
     <h1>Create a new vehicle</h1>
     <hr />
     <p>This is where you can create a new vehicle</p>
+    <p style="color:red">@Model.ErrorMessage</p>
 </div>
 
 @using (Html.BeginForm(new
 {
     originActionName = Model.OriginActionName,
-    originControllerName = Model.OriginControllerName,
-    displayCheckInTime = Model.DisplayCheckInTime
+    originControllerName = Model.OriginControllerName
 }))
 {
     @Html.AntiForgeryToken()

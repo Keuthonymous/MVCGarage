@@ -8,6 +8,7 @@
     <h1>Create a parking spot</h1>
     <hr />
     <p>This is where you can create a new parking spot</p>
+    <p style="color:red">@Model.ErrorMessage</p>
 </div>
 
 
@@ -22,17 +23,20 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ParkingSpot.VehicleType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @{if (Model.VehicleType == MVCGarage.Models.ETypeVehicle.undefined)
-                {
-                    @Html.DropDownListFor(model => model.ParkingSpot.VehicleType,
-                               (IEnumerable<SelectListItem>)ViewBag.SelectVehicleTypes,
-                                      htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ParkingSpot.VehicleType, "", new { @class = "text-danger" })
-                }
-                else
-                {
-                    @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
-                }
+                @{
+                    if (Model.VehicleType == MVCGarage.Models.ETypeVehicle.undefined)
+                    {
+                        @Html.DropDownListFor(model => model.ParkingSpot.VehicleType,
+                                             (IEnumerable<SelectListItem>)ViewBag.SelectVehicleTypes,
+                                             htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ParkingSpot.VehicleType,
+                                                   "",
+                                                   new { @class = "text-danger" })
+                    }
+                    else
+                    {
+                        @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
+                    }
                 }
             </div>
         </div>
@@ -62,15 +66,32 @@
             @Html.LabelFor(model => model.ParkingSpot.Fee, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @{ Html.EnableClientValidation(false); }
-                @Html.EditorFor(model => model.ParkingSpot.Fee, new
-           {
-               htmlAttributes = new
-               {
-                   @class = "form-control",
-                   placeholder = "Hover for info about default values",
-                   @title = "Please let it blank!"
-               }
-           })
+                @{
+                    string toolTip = "Default fee values:";
+                    toolTip += string.Format("{0}{1}{0}", Environment.NewLine, new string('-', 19));
+                    foreach (MVCGarage.Models.ETypeVehicle vehicleType in Model.DefaultFees.Keys)
+                    {
+                        string text = string.Format("{0}: {1:N2}/min.",
+                                                    MVCGarage.Models.EnumHelper.GetDescriptionAttr(vehicleType),
+                                                    Model.DefaultFees[vehicleType]);
+
+                        toolTip += string.Format("{0}{1}",
+                                                 text,
+                                                 string.Format("{0}{1}{0}",
+                                                               Environment.NewLine,
+                                                               new string('-', text.Length)));
+                    }
+                }
+                @Html.EditorFor(model => model.ParkingSpot.Fee,
+                                new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control",
+                                        placeholder = "Hover for info about default values",
+                                        @title = toolTip
+                                    }
+                                })
                 @{ Html.EnableClientValidation(true); }
                 @Html.ValidationMessageFor(model => model.ParkingSpot.Fee, "", new { @class = "text-danger" })
             </div>

@@ -155,14 +155,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705300821100_Initial.cs" />
-    <Compile Include="Migrations\201705300821100_Initial.Designer.cs">
-      <DependentUpon>201705300821100_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705300921536_Initial1.cs" />
-    <Compile Include="Migrations\201705300921536_Initial1.Designer.cs">
-      <DependentUpon>201705300921536_Initial1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EnumHelper.cs" />
     <Compile Include="Models\ETypeVehicle.cs" />
@@ -172,7 +164,9 @@
     <Compile Include="Repositories\ParkingSpotsRepository.cs" />
     <Compile Include="Repositories\VehicleRepository.cs" />
     <Compile Include="ViewModels\Garage\DisplayVehiclesVM.cs" />
-    <Compile Include="ViewModels\Garage\SelectAParkingSpotVM.cs" />
+    <Compile Include="ViewModels\Garage\ParkingSpotUnbooked.cs" />
+    <Compile Include="ViewModels\ParkingSpots\DetailsParkingSpotVM.cs" />
+    <Compile Include="ViewModels\ParkingSpots\SelectAParkingSpotVM.cs" />
     <Compile Include="ViewModels\Garage\BookedParkingSpotVM.cs" />
     <Compile Include="ViewModels\Garage\VehicleCheckedInVM.cs" />
     <Compile Include="ViewModels\Garage\VehicleCheckedOutVM.cs" />
@@ -236,25 +230,19 @@
     <Content Include="Views\Vehicles\Delete.cshtml" />
     <Content Include="Views\Vehicles\Details.cshtml" />
     <Content Include="Views\Vehicles\Edit.cshtml" />
-    <Content Include="Views\Garage\SelectAParkingSpot.cshtml" />
+    <Content Include="Views\ParkingSpots\SelectAParkingSpot.cshtml" />
     <Content Include="Views\Garage\ParkingSpotBooked.cshtml" />
     <Content Include="Views\Garage\VehicleCheckedIn.cshtml" />
     <Content Include="Views\Garage\DisplayAllVehicles.cshtml" />
     <Content Include="Views\Garage\DisplayParkedVehicles.cshtml" />
     <Content Include="Views\Garage\_DisplayVehiclesPartial.cshtml" />
     <Content Include="Views\Garage\VehicleCheckedOut.cshtml" />
-    <Content Include="Views\Garage\BookAParkingSpot.cshtml" />
+    <Content Include="Views\Vehicles\BookAParkingSpot.cshtml" />
     <Content Include="Views\Vehicles\CheckOutVehicle.cshtml" />
     <Content Include="Views\Vehicles\_SelectAVehiclePartial.cshtml" />
     <Content Include="Views\Vehicles\CheckInVehicle.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705300821100_Initial.resx">
-      <DependentUpon>201705300821100_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705300921536_Initial1.resx">
-      <DependentUpon>201705300921536_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
+    <Content Include="Views\Garage\ParkingSpotUnbooked.cshtml" />
+    <Content Include="Views\Vehicles\UnbookParkingSpot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,0 +1,16 @@
+﻿@model MVCGarage.ViewModels.Vehicles.SelectAVehicleVM
+
+@{
+    ViewBag.Title = "Unbook a Parking Spot";
+}
+<div class="header jumbotron">
+    <h1>Unbook a Parking Spot</h1>
+    <hr />
+    <p>This is where you select the vehicle you would like to unbook its parking spot</p>
+    <p style="color:red">@Model.ErrorMessage</p>
+</div>
+
+@using (@Html.BeginForm())
+{
+    @Html.Partial("_SelectAVehiclePartial", Model)
+}

@@ -10,12 +10,24 @@ namespace MVCGarage.Repositories
     public class ParkingSpotsRepository : IDisposable
     {
         private GarageContext db = new GarageContext();
-        //private Dictionary<ETypeVehicle, double> DefaultFees = new Dictionary<ETypeVehicle, double> { 
-        //{ETypeVehicle.car, 0.20 },
-        //{ETypeVehicle.car, 0.20 },
-        //{ETypeVehicle.car, 0.20 },
-        //{ETypeVehicle.car, 0.20 }};
+        private Dictionary<ETypeVehicle, double> defaultFees = new Dictionary<ETypeVehicle, double> {
+        {ETypeVehicle.car, 0.20 },
+        {ETypeVehicle.motorcycle, 0.50 },
+        {ETypeVehicle.truck, 0.80 },
+        {ETypeVehicle.bus, 1.00 }};
 
+        public Dictionary<ETypeVehicle, double> DefaultFees()
+        {
+            return defaultFees;
+        }
+
+        public double DefaultFee(ETypeVehicle vehicleType)
+        {
+            if (defaultFees.ContainsKey(vehicleType))
+                return defaultFees[vehicleType];
+            else
+                return 0;
+        }
 
         public IEnumerable<ParkingSpot> ParkingSpots()
         {
@@ -25,6 +37,11 @@ namespace MVCGarage.Repositories
         public ParkingSpot ParkingSpot(int? id)
         {
             return db.ParkingSpots.Find(id);
+        }
+
+        public ParkingSpot ParkingSpotByIdentifiant(string label)
+        {
+            return ParkingSpots().SingleOrDefault(p => string.Compare(p.Label, label, StringComparison.InvariantCultureIgnoreCase) == 0);
         }
 
         public IEnumerable<ParkingSpot> AvailableParkingSpots(ETypeVehicle vehicleType = ETypeVehicle.undefined)
@@ -58,6 +75,7 @@ namespace MVCGarage.Repositories
             else
             {
                 parkingSpot.VehicleID = vehicleId;
+                parkingSpot.CheckInTime = DateTime.Now;
                 Edit(parkingSpot);
             }
 
@@ -69,7 +87,9 @@ namespace MVCGarage.Repositories
             if (parkingSpotId != null)
             {
                 ParkingSpot parkingSpot = ParkingSpot(parkingSpotId);
+
                 parkingSpot.VehicleID = null;
+                parkingSpot.CheckInTime = null;
                 Edit(parkingSpot);
             }
         }

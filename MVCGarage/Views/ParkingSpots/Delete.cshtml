@@ -21,9 +21,11 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Label)
                 </th>
-
                 <th>
                     @Html.DisplayNameFor(model => model.VehicleType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fee)
                 </th>
             </tr>
             <tr>
@@ -32,6 +34,9 @@
                 </td>
                 <td>
                     @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
+                </td>
+                <td>
+                    @Model.DisplayFee()
                 </td>
             </tr>
         </table>
