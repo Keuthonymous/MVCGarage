@@ -209,14 +209,12 @@ namespace MVCGarage.Controllers
                                         new { errorMessage = "You must select a vehicle!" });
 
             return RedirectToAction("SelectAParkingSpot",
-                                    "Garage",
-                                    new SelectAParkingSpotVM
+                                    "ParkingSpots", 
+                                    new 
                                     {
-                                        VehicleID = vehicle.ID,
-                                        CheckIn = false,
-                                        ErrorMessage = errorMessage,
-                                        FollowingActionName = "ParkingSpotBooked",
-                                        FollowingControllerName = "Garage"
+                                        vehicleID = vehicle.ID,
+                                        checkIn = false,
+                                        errorMessage = errorMessage,
                                     });
         }
 

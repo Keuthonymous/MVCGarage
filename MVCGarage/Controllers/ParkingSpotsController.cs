@@ -211,9 +211,12 @@ namespace MVCGarage.Controllers
         }
 
         [HttpGet]
-        public ActionResult SelectAParkingSpot(SelectAParkingSpotVM viewModel)
+        public ActionResult SelectAParkingSpot(int? vehicleId, bool checkIn, string errorMessage)
         {
-            Vehicle vehicle = new GarageController().Vehicle(viewModel.VehicleID);
+            if (vehicleId == null)
+                return RedirectToAction("BookAParkingSpot", "Vehicles", new { errorMessage = "You must select a vehicle!" });
+
+            Vehicle vehicle = new GarageController().Vehicle(vehicleId);
 
             if (vehicle == null)
                 return RedirectToAction("BookAParkingSpot", "Vehicles", new { errorMessage = "You must select a vehicle!" });
@@ -221,14 +224,55 @@ namespace MVCGarage.Controllers
             // Allows the user to select an available parking spot (if any), depending on the type of vehicle
             return View(new SelectAParkingSpotVM
             {
-                VehicleID = viewModel.VehicleID,
+                VehicleID = (int)vehicleId,
                 SelectedVehicle = vehicle,
-                CheckIn = viewModel.CheckIn,
-                ErrorMessage = viewModel.ErrorMessage,
-                ParkingSpots = db.AvailableParkingSpots(vehicle.VehicleType),
-                FollowingActionName = viewModel.FollowingActionName,
-                FollowingControllerName = viewModel.FollowingControllerName
+                CheckIn = checkIn,
+                ErrorMessage = errorMessage,
+                ParkingSpots = db.AvailableParkingSpots(vehicle.VehicleType)
             });
+        }
+
+        [HttpPost]
+        public ActionResult SelectAParkingSpot(SelectAParkingSpotVM viewModel)
+        {
+            Vehicle vehicle = new GarageController().Vehicle(viewModel.VehicleID);
+
+            if (vehicle == null)
+                return RedirectToAction("BookAParkingSpot",
+                                        "Vehicles",
+                                        new
+                                        {
+                                            checkIn = viewModel.CheckIn,
+                                            errorMessage = "You must select a vehicle!"
+                                        });
+
+            ParkingSpot parkingSpot = db.ParkingSpot(viewModel.ParkingSpotID);
+
+            if (parkingSpot == null)
+                return RedirectToAction("SelectAParkingSpot",
+                                        new
+                                        {
+                                            vehicleId = viewModel.VehicleID,
+                                            checkIn = viewModel.CheckIn,
+                                            errorMessage = "You must select a parking spot!"
+                                        });
+
+            if (viewModel.CheckIn)
+                return RedirectToAction("VehicleCheckedIn",
+                                        "Garage",
+                                        new SelectAParkingSpotVM
+                                        {
+                                            ParkingSpotID = viewModel.ParkingSpotID,
+                                            VehicleID = viewModel.VehicleID
+                                        });
+            else
+                return RedirectToAction("ParkingSpotBooked",
+                                        "Garage",
+                                        new SelectAParkingSpotVM
+                                        {
+                                            ParkingSpotID = viewModel.ParkingSpotID,
+                                            VehicleID = viewModel.VehicleID
+                                        });
         }
 
         protected override void Dispose(bool disposing)

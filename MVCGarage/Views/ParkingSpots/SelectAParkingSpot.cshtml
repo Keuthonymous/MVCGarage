@@ -11,7 +11,7 @@
     <p style="color:red">@Model.ErrorMessage</p>
 </div>
 
-@using (@Html.BeginForm(Model.FollowingActionName, Model.FollowingControllerName, FormMethod.Post))
+@using (@Html.BeginForm())
 {
     if (Model.ParkingSpots.Count() == 0)
     {
@@ -113,6 +113,6 @@
                    class="btn btn-default" /><text> | </text>
         }
         @Html.ActionLink("Back to List", "Index", "Home")
-        @Html.HiddenFor(model => Model.VehicleID)
+        @*@Html.HiddenFor(model => Model.VehicleID)*@
     </div>
 }

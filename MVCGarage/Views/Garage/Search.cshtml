@@ -1,0 +1,75 @@
+﻿@model MVCGarage.ViewModels.Garage.SearchResultsVM
+
+<div>
+    <h4>Foudn Vehicle</h4>
+    <hr />
+    @if (Model.FoundVehicle == null)
+    {
+        <p>No Vehicle Registration Plate is matching '@Model.SearchedValue'.</p>
+    }
+    else
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FoundVehicle.RegistrationPlate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FoundVehicle.RegistrationPlate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FoundVehicle.Owner)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FoundVehicle.Owner)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FoundVehicle.VehicleType)
+            </dt>
+
+            <dd>
+                @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.FoundVehicle.VehicleType))
+            </dd>
+        </dl>
+    }
+    <h4>Found Parking Spot</h4>
+    <hr />
+    @if (Model.FoundVehicle == null)
+    {
+        <p>No Parking Spot Identifiant is matching '@Model.SearchedValue'.</p>
+    }
+    else
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FoundParkingSpot.Label)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FoundParkingSpot.Label)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FoundParkingSpot.Fee)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FoundParkingSpot.Fee)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FoundParkingSpot.CheckInTime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FoundParkingSpot.CheckInTime)
+            </dd>
+        </dl>
+    }
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

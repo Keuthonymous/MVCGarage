@@ -200,30 +200,28 @@ namespace MVCGarage.Controllers
             });
         }
 
+        //[HttpGet]
+        //public ActionResult SelectAParkingSpot(SelectAParkingSpotVM viewModel)
+        //{
+        //    Vehicle vehicle = vehicles.Vehicle(viewModel.VehicleID);
+
+        //    // Happends if the user clicks on "Submit" without having selected a vehicle
+        //    // or if the URL is manually entered
+        //    if (vehicle == null)
+        //        return RedirectToAction("Index", "Home");
+
+        //    // Allows the user to select an available parking spot (if any), depending on the type of vehicle
+        //    return RedirectToAction("SelectAParkingSpot",
+        //                            "ParkingSpots",
+        //                            new 
+        //                            {
+        //                                vehicleId = viewModel.VehicleID,
+        //                                checkIn = viewModel.CheckIn,
+        //                                errorMessage = viewModel.ErrorMessage,
+        //                            });
+        //}
+
         [HttpGet]
-        public ActionResult SelectAParkingSpot(SelectAParkingSpotVM viewModel)
-        {
-            Vehicle vehicle = vehicles.Vehicle(viewModel.VehicleID);
-
-            // Happends if the user clicks on "Submit" without having selected a vehicle
-            // or if the URL is manually entered
-            if (vehicle == null)
-                return RedirectToAction("Index", "Home");
-
-            // Allows the user to select an available parking spot (if any), depending on the type of vehicle
-            return RedirectToAction("SelectAParkingSpot",
-                                    "ParkingSpots",
-                                    new SelectAParkingSpotVM
-                                    {
-                                        VehicleID = viewModel.VehicleID,
-                                        CheckIn = viewModel.CheckIn,
-                                        ErrorMessage = viewModel.ErrorMessage,
-                                        FollowingActionName = viewModel.FollowingActionName,
-                                        FollowingControllerName = viewModel.FollowingControllerName
-                                    });
-        }
-
-        [HttpPost]
         public ActionResult ParkingSpotBooked(SelectAParkingSpotVM viewModel)
         {
             // Check in the vehicle ID to the parking spot
@@ -298,20 +296,29 @@ namespace MVCGarage.Controllers
                 return RedirectToAction("Index", "Home");
 
             return RedirectToAction("SelectAParkingSpot",
-                new SelectAParkingSpotVM
-                {
-                    VehicleID = vehicle.ID,
-                    SelectedVehicle = vehicles.Vehicle(vehicleId),
-                    CheckIn = true,
-                    ErrorMessage = errorMessage,
-                    FollowingActionName = "VehicleCheckedIn",
-                    FollowingControllerName = "Garage"
-                });
+                                    "ParkingSpots",
+                                    new
+                                    {
+                                        vehicleID = vehicle.ID,
+                                        checkIn = true,
+                                        errorMessage = errorMessage,
+                                    });
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult VehicleCheckedIn(SelectAParkingSpotVM viewModel)
         {
+            Vehicle vehicle = new GarageController().Vehicle(viewModel.VehicleID);
+
+            if (vehicle == null)
+                return RedirectToAction("BookAParkingSpot",
+                                        "Vehicles",
+                                        new
+                                        {
+                                            checkIn = viewModel.CheckIn,
+                                            errorMessage = "You must select a vehicle!"
+                                        });
+
             // Check in the vehicle ID to the parking spot
             ParkingSpot parkingSpot = parkingSpots.ParkingSpot(viewModel.ParkingSpotID);
 
@@ -377,6 +384,16 @@ namespace MVCGarage.Controllers
                 NbMinutes = nbMinutes,
                 CheckOutTime = now,
                 TotalAmount = totalAmount
+            });
+        }
+
+        public ActionResult Search(string searchedValue)
+        {
+            return View(new SearchResultsVM
+            {
+                SearchedValue = searchedValue,
+                FoundParkingSpot = parkingSpots.ParkingSpotByIdentifiant(searchedValue),
+                FoundVehicle = vehicles.VehicleByRegistrationPlate(searchedValue)
             });
         }
 
