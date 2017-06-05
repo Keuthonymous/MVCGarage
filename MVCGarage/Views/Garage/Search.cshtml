@@ -26,13 +26,13 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.DisplayFor(model => model.FoundVehicle.Owner)
-                    </td>
-                    <td>
                         @Html.DisplayFor(model => model.FoundVehicle.RegistrationPlate)
                     </td>
                     <td>
                         @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.FoundVehicle.VehicleType))
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FoundVehicle.Owner)
                     </td>
                 </tr>
             </table>
@@ -60,15 +60,14 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.DisplayFor(model => model.FoundParkingSpot.Fee)
-                    </td>
-
-                    <td>
                         @Html.DisplayFor(model => model.FoundParkingSpot.Label)
                     </td>
 
                     <td>
                         @Html.DisplayFor(model => model.FoundParkingSpot.CheckInTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FoundParkingSpot.Fee)
                     </td>
                 </tr>
             </table>
