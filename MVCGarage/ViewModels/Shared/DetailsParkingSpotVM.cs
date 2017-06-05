@@ -1,6 +1,6 @@
 ﻿using MVCGarage.Models;
 
-namespace MVCGarage.ViewModels.ParkingSpots
+namespace MVCGarage.ViewModels.Shared
 {
     public class DetailsParkingSpotVM
     {

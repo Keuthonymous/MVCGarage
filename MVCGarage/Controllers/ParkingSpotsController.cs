@@ -1,6 +1,7 @@
 ﻿using MVCGarage.Models;
 using MVCGarage.Repositories;
 using MVCGarage.ViewModels.ParkingSpots;
+using MVCGarage.ViewModels.Shared;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,7 +12,6 @@ namespace MVCGarage.Controllers
     public class ParkingSpotsController : Controller
     {
         private ParkingSpotsRepository db = new ParkingSpotsRepository();
-
 
         private IEnumerable<ParkingSpot> Sort(IEnumerable<ParkingSpot> list, string sortOrder)
         {
@@ -51,8 +51,11 @@ namespace MVCGarage.Controllers
             return list;
         }
 
-        private string Availability(ParkingSpot parkingSpot)
+        public string Availability(ParkingSpot parkingSpot)
         {
+            if (parkingSpot == null)
+                return string.Empty;
+            
             if (parkingSpot.VehicleID == null)
                 return "Yes";
             else

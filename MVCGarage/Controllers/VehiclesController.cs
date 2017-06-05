@@ -32,10 +32,10 @@ namespace MVCGarage.Controllers
             ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
 
             if (viewModel.OriginActionName == null)
-                viewModel.OriginActionName = "Index";
+                viewModel.OriginActionName = "DisplayAllVehicles";
 
             if (viewModel.OriginControllerName == null)
-                viewModel.OriginControllerName = string.Empty;
+                viewModel.OriginControllerName = "Garage";
 
             return View(viewModel);
         }

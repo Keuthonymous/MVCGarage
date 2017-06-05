@@ -2,6 +2,7 @@
 using MVCGarage.Repositories;
 using MVCGarage.ViewModels.Garage;
 using MVCGarage.ViewModels.ParkingSpots;
+using MVCGarage.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -373,11 +374,22 @@ namespace MVCGarage.Controllers
 
         public ActionResult Search(string searchedValue)
         {
+            ParkingSpot foundParkingSpot = parkingSpots.ParkingSpotByIdentifiant(searchedValue);
+            Vehicle parkedVehicle = null;
+
+            if (foundParkingSpot != null)
+                parkedVehicle = vehicles.Vehicle(foundParkingSpot.VehicleID);
+
             return View(new SearchResultsVM
             {
                 SearchedValue = searchedValue,
-                FoundParkingSpot = parkingSpots.ParkingSpotByIdentifiant(searchedValue),
-                FoundVehicle = vehicles.VehicleByRegistrationPlate(searchedValue)
+                FoundVehicle = vehicles.VehicleByRegistrationPlate(searchedValue),
+                FoundParkingSpot = new DetailsParkingSpotVM
+                {
+                    Availability = new ParkingSpotsController().Availability(foundParkingSpot),
+                    ParkingSpot = foundParkingSpot,
+                    Vehicle = parkedVehicle
+                }
             });
         }
 

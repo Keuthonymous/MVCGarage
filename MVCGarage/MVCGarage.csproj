@@ -166,7 +166,7 @@
     <Compile Include="ViewModels\Garage\DisplayVehiclesVM.cs" />
     <Compile Include="ViewModels\Garage\ParkingSpotUnbooked.cs" />
     <Compile Include="ViewModels\Garage\SearchResultsVM.cs" />
-    <Compile Include="ViewModels\ParkingSpots\DetailsParkingSpotVM.cs" />
+    <Compile Include="ViewModels\Shared\DetailsParkingSpotVM.cs" />
     <Compile Include="ViewModels\ParkingSpots\SelectAParkingSpotVM.cs" />
     <Compile Include="ViewModels\Garage\BookedParkingSpotVM.cs" />
     <Compile Include="ViewModels\Garage\VehicleCheckedInVM.cs" />

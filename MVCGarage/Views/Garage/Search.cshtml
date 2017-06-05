@@ -17,11 +17,10 @@
                         @Html.DisplayNameFor(model => model.FoundVehicle.RegistrationPlate)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.FoundVehicle.VehicleType)
-                    </th>
-
-                    <th>
                         @Html.DisplayNameFor(model => model.FoundVehicle.Owner)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FoundVehicle.VehicleType)
                     </th>
                 </tr>
                 <tr>
@@ -29,10 +28,10 @@
                         @Html.DisplayFor(model => model.FoundVehicle.RegistrationPlate)
                     </td>
                     <td>
-                        @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.FoundVehicle.VehicleType))
+                        @Html.DisplayFor(model => model.FoundVehicle.Owner)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => model.FoundVehicle.Owner)
+                        @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.FoundVehicle.VehicleType))
                     </td>
                 </tr>
             </table>
@@ -40,34 +39,78 @@
 
         <h1>Found Parking Spot</h1>
         <hr />
-        @if (Model.FoundParkingSpot == null)
+        @if (Model.FoundParkingSpot.ParkingSpot == null)
         {
             <p>No Parking Spot Identifiant is matching '@Model.SearchedValue'.</p>
         }
         else
         {
+            bool available = false;
+            bool parked = false;
+            bool booked = false;
+
+            if (Model.FoundParkingSpot.Vehicle == null)
+            {
+                available = true;
+            }
+            else if (Model.FoundParkingSpot.Vehicle.ParkingSpotID == null)
+            {
+                booked = true;
+            }
+            else
+            {
+                parked = true;
+            }
+
             <table>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.FoundParkingSpot.Label)
+                        @Html.DisplayNameFor(model => model.FoundParkingSpot.ParkingSpot.Label)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.FoundParkingSpot.CheckInTime)
+                        @Html.DisplayName("Availability")
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.FoundParkingSpot.Fee)
+                        @Html.DisplayNameFor(model => model.FoundParkingSpot.ParkingSpot.CheckInTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FoundParkingSpot.ParkingSpot.Fee)
                     </th>
                 </tr>
                 <tr>
                     <td>
-                        @Html.DisplayFor(model => model.FoundParkingSpot.Label)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(model => model.FoundParkingSpot.CheckInTime)
+                        @Html.DisplayFor(model => model.FoundParkingSpot.ParkingSpot.Label)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => model.FoundParkingSpot.Fee)
+                        @if (available)
+                        {
+                            @Html.DisplayName("Available")
+                        }
+                        else if (booked)
+                        {
+                            @Html.DisplayName(string.Format("Booked for {0} ({1})",
+                                                            Model.FoundParkingSpot.Vehicle.RegistrationPlate,
+                                                            Model.FoundParkingSpot.Vehicle.Owner))
+                        }
+                        else if (parked)
+                        {
+                            @Html.DisplayName(string.Format("Taken by {0} ({1})",
+                                                            Model.FoundParkingSpot.Vehicle.RegistrationPlate,
+                                                            Model.FoundParkingSpot.Vehicle.Owner))
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FoundParkingSpot.ParkingSpot.CheckInTime)
+                    </td>
+                    <td>
+                        @if (available || parked)
+                        {
+                            @Model.FoundParkingSpot.ParkingSpot.DisplayFee();
+                        }
+                        else if (booked)
+                        {
+                            @Model.FoundParkingSpot.ParkingSpot.DisplayMonthlyFee();
+                        }
                     </td>
                 </tr>
             </table>

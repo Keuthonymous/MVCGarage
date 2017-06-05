@@ -1,8 +1,5 @@
 ﻿using MVCGarage.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using MVCGarage.ViewModels.Shared;
 
 namespace MVCGarage.ViewModels.Garage
 {
@@ -10,6 +7,6 @@ namespace MVCGarage.ViewModels.Garage
     {
         public string SearchedValue { get; set; }
         public Vehicle FoundVehicle { get; set; }
-        public ParkingSpot FoundParkingSpot { get; set; }
+        public DetailsParkingSpotVM FoundParkingSpot { get; set; }
     }
 }
