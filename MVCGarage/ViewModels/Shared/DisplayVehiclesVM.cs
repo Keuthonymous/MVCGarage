@@ -1,7 +1,7 @@
 ﻿using MVCGarage.Models;
 using System.Collections.Generic;
 
-namespace MVCGarage.ViewModels.Garage
+namespace MVCGarage.ViewModels.Shared
 {
     public class DisplayVehiclesVM
     {

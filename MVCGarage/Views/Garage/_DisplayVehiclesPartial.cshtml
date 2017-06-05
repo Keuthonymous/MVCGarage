@@ -1,4 +1,4 @@
-﻿@model MVCGarage.ViewModels.Garage.DisplayVehiclesVM
+﻿@model MVCGarage.ViewModels.Shared.DisplayVehiclesVM
 
 <div class="container">
     <div class="index-table">
@@ -14,18 +14,18 @@
                 </th>
                 <th>
                     @{htmlName = @Html.DisplayNameFor(model => model.Vehicles.First().VehicleType).ToHtmlString();}
-                    @Html.ActionLink(htmlName, Model.ViewName, new { sortOrder = ViewBag.VehicleTypeSortParam })
+                    @Html.ActionLink(htmlName, Model.ViewName, new { sortOrder = ViewBag.VehicleVehicleTypeSortParam })
                 </th>
                 <th>
                     @{htmlName = @Html.DisplayNameFor(model => model.ParkingSpotsVehicles.Values.First().CheckInTime).ToHtmlString();}
-                    @Html.ActionLink(htmlName, Model.ViewName, new { sortOrder = ViewBag.CheckInTimeSortParam })
+                    @Html.ActionLink(htmlName, Model.ViewName, new { sortOrder = ViewBag.VehicleCheckInTimeSortParam })
                 </th>
                 <th>
                     @Html.ActionLink("Parking spot", Model.ViewName, new { sortOrder = ViewBag.ParkingSpotSortParam })
                 </th>
                 <th>
                     @{htmlName = @Html.DisplayNameFor(model => model.ParkingSpotsVehicles.Values.First().Fee).ToHtmlString();}
-                    @Html.ActionLink(htmlName, Model.ViewName, new { sortOrder = ViewBag.FeeSortParam })
+                    @Html.ActionLink(htmlName, Model.ViewName, new { sortOrder = ViewBag.VehicleFeeSortParam })
                 </th>
                 <th></th>
             </tr>
@@ -90,7 +90,12 @@
                                                  "Vehicles",
                                                  new { vehicleId = item.ID },
                                                  null)
-
+                                <text> | </text>
+                                @Html.ActionLink("Edit",
+                                                 "Edit",
+                                                 "Vehicles",
+                                                 new { id = item.ID },
+                                                 null)
                             }
                             else
                             {
