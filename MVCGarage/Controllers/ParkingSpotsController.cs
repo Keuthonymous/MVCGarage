@@ -13,12 +13,19 @@ namespace MVCGarage.Controllers
     {
         private ParkingSpotsRepository db = new ParkingSpotsRepository();
 
-        private IEnumerable<ParkingSpot> Sort(IEnumerable<ParkingSpot> list, string sortOrder)
+        public IEnumerable<ParkingSpot> Sort(IEnumerable<ParkingSpot> list, string sortOrder)
         {
             ViewBag.LabelSortParam = string.IsNullOrEmpty(sortOrder) ? "label_desc" : "label_asc";
             ViewBag.AvailableSortParam = sortOrder == "available_asc" ? "available_desc" : "available_asc";
             ViewBag.VehicleTypeSortParam = sortOrder == "vehicletype_asc" ? "vehicletype_desc" : "vehicletype_asc";
             ViewBag.FeeSortParam = sortOrder == "fee_asc" ? "fee_desc" : "fee_asc";
+
+            ViewBag.RegistrationPlateSortParam = sortOrder == "regnum_asc" ? "regnum_desc" : "regnum_asc";
+            ViewBag.OwnerSortParam = sortOrder == "owner_asc" ? "owner_desc" : "owner_asc";
+            ViewBag.VehicleVehicleTypeSortParam = sortOrder == "vehicletype_asc" ? "vehicletype_desc" : "vehicletype_asc";
+            ViewBag.VehicleCheckInTimeSortParam = sortOrder == "checkin_asc" ? "checkin_desc" : "checkin_asc";
+            ViewBag.ParkingSpotSortParam = sortOrder == "spot_asc" ? "spot_desc" : "spot_asc";
+            ViewBag.VehicleFeeSortParam = sortOrder == "fee_asc" ? "fee_desc" : "fee_asc";
 
             switch (sortOrder)
             {
@@ -38,10 +45,10 @@ namespace MVCGarage.Controllers
                     list = list.OrderByDescending(p => EnumHelper.GetDescriptionAttr(p.VehicleType));
                     break;
                 case "fee_asc":
-                    list = list.OrderBy(p => p.GetFee());
+                    list = list.OrderBy(p => Availability(p).StartsWith("Booked") ? p.MonthlyFee() : p.GetFee());
                     break;
                 case "fee_desc":
-                    list = list.OrderByDescending(p => p.GetFee());
+                    list = list.OrderByDescending(p => Availability(p).StartsWith("Booked") ? p.MonthlyFee() : p.GetFee());
                     break;
                 default:
                     list = list.OrderBy(p => p.Label);
@@ -55,7 +62,7 @@ namespace MVCGarage.Controllers
         {
             if (parkingSpot == null)
                 return string.Empty;
-            
+
             if (parkingSpot.VehicleID == null)
                 return "Yes";
             else

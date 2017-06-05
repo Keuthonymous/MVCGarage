@@ -44,6 +44,11 @@ namespace MVCGarage.Repositories
             return ParkingSpots().SingleOrDefault(p => string.Compare(p.Label, label, StringComparison.InvariantCultureIgnoreCase) == 0);
         }
 
+        public IEnumerable<ParkingSpot> ParkingSpotsByIdentifiant(string label)
+        {
+            return ParkingSpots().Where(p => p.Label.ToUpper().Contains(label.ToUpper()));
+        }
+
         public IEnumerable<ParkingSpot> AvailableParkingSpots(ETypeVehicle vehicleType = ETypeVehicle.undefined)
         {
             return ParkingSpots().Where(p => (vehicleType == ETypeVehicle.undefined || p.VehicleType == vehicleType) && p.VehicleID == null);

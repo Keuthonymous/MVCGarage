@@ -13,8 +13,5 @@ namespace MVCGarage.ViewModels.ParkingSpots
         public bool CheckIn { get; set; }
 
         public string ErrorMessage { get; set; }
-
-        //public string FollowingActionName { get; set; }
-        //public string FollowingControllerName { get; set; }
     }
 }
