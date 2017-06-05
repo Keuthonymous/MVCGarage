@@ -112,7 +112,7 @@ namespace MVCGarage.Controllers
             if (ModelState.IsValid)
             {
                 db.Edit(vehicle);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
             }
             return View(vehicle);
         }
