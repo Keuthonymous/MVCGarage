@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace MVCGarage.Repositories
 {
@@ -20,6 +19,11 @@ namespace MVCGarage.Repositories
         public Vehicle Vehicle(int? id)
         {
             return db.Vehicles.Find(id);
+        }
+
+        public Vehicle VehicleByRegistrationPlate(string registrationPlate)
+        {
+            return Vehicles().SingleOrDefault(v => string.Compare(v.RegistrationPlate, registrationPlate, StringComparison.InvariantCultureIgnoreCase) == 0);
         }
 
         public IEnumerable<Vehicle> ParkedVehicles(ETypeVehicle vehicleType = ETypeVehicle.undefined)
@@ -48,7 +52,6 @@ namespace MVCGarage.Repositories
         {
             Vehicle vehicle = Vehicle(vehicleId);
             vehicle.ParkingSpotID = parkingSpotId;
-            vehicle.CheckInTime = DateTime.Now;
             Edit(vehicle);
         }
 
@@ -58,7 +61,6 @@ namespace MVCGarage.Repositories
             {
                 Vehicle vehicle = Vehicle(vehicleId);
                 vehicle.ParkingSpotID = null;
-                vehicle.CheckInTime = null;
                 Edit(vehicle);
             }
         }

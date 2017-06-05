@@ -17,32 +17,24 @@
         <table>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.VehicleType)
+                    @Html.DisplayNameFor(model => model.RegistrationPlate)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Owner)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.RegistrationPlate)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.CheckInTime)
+                    @Html.DisplayNameFor(model => model.VehicleType)
                 </th>
             </tr>
             <tr>
                 <td>
-                    @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
+                    @Html.DisplayFor(model => model.RegistrationPlate)
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.Owner)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.RegistrationPlate)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(model => model.CheckInTime)
+                    @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
                 </td>
             </tr>
         </table>

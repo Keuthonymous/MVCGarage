@@ -22,33 +22,25 @@
                 </th>
 
                 <th>
-            @Html.DisplayNameFor(model => model.Vehicle.VehicleType)
-                </th>
-
-                <th>
-                    @Html.DisplayName("Check in time")
+                    @Html.DisplayNameFor(model => model.Vehicle.VehicleType)
                 </th>
             </tr>
 
             <tr>
                 <td>
-            @Html.DisplayFor(model => model.Vehicle.RegistrationPlate)
+                    @Html.DisplayFor(model => model.Vehicle.RegistrationPlate)
                 </td>
 
                 <td>
-            @Html.DisplayFor(model => model.Vehicle.Owner)
+                    @Html.DisplayFor(model => model.Vehicle.Owner)
                 </td>
 
                 <td>
                     @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.Vehicle.VehicleType))
                 </td>
-
-                <td>
-                    @Html.DisplayFor(model => model.Vehicle.CheckInTime)
-                </td>
             </tr>
         </table>
-</div>
+    </div>
 
     <hr />
     <h2>Parking Spot</h2>
@@ -56,18 +48,28 @@
         <table>
             <tr>
                 <th>
-            @Html.DisplayNameFor(model => model.ParkingSpot.Label)
+                    @Html.DisplayNameFor(model => model.ParkingSpot.Label)
                 </th>
+
                 <th>
                     @Html.DisplayNameFor(model => model.ParkingSpot.Fee)
+                </th>
+
+                <th>
+                    @Html.DisplayName("Check in time")
                 </th>
             </tr>
             <tr>
                 <td>
-            @Html.DisplayFor(model => model.ParkingSpot.Label)
+                    @Html.DisplayFor(model => model.ParkingSpot.Label)
                 </td>
+
                 <td>
-                    @Html.DisplayFor(model => model.ParkingSpot.Fee)/min.
+                    @Model.ParkingSpot.DisplayFee()
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.ParkingSpot.CheckInTime)
                 </td>
             </tr>
         </table>

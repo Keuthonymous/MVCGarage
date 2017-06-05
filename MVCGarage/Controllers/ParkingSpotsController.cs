@@ -26,10 +26,10 @@ namespace MVCGarage.Controllers
                     list = list.OrderByDescending(p => p.Label);
                     break;
                 case "available_asc":
-                    list = list.OrderBy(p => p.Available());
+                    list = list.OrderBy(p => Availability(p));
                     break;
                 case "available_desc":
-                    list = list.OrderByDescending(p => p.Available());
+                    list = list.OrderByDescending(p => Availability(p));
                     break;
                 case "vehicletype_asc":
                     list = list.OrderBy(p => EnumHelper.GetDescriptionAttr(p.VehicleType));
@@ -38,10 +38,10 @@ namespace MVCGarage.Controllers
                     list = list.OrderByDescending(p => EnumHelper.GetDescriptionAttr(p.VehicleType));
                     break;
                 case "fee_asc":
-                    list = list.OrderBy(p => p.Fee);
+                    list = list.OrderBy(p => p.GetFee());
                     break;
                 case "fee_desc":
-                    list = list.OrderByDescending(p => p.Fee);
+                    list = list.OrderByDescending(p => p.GetFee());
                     break;
                 default:
                     list = list.OrderBy(p => p.Label);
@@ -49,6 +49,21 @@ namespace MVCGarage.Controllers
             }
 
             return list;
+        }
+
+        private string Availability(ParkingSpot parkingSpot)
+        {
+            if (parkingSpot.VehicleID == null)
+                return "Yes";
+            else
+            {
+                Vehicle vehicle = new GarageController().Vehicle(parkingSpot.VehicleID);
+
+                if (vehicle.ParkingSpotID == parkingSpot.ID)
+                    return "Taken by " + vehicle.RegistrationPlate;
+                else
+                    return "Booked by " + vehicle.RegistrationPlate;
+            }
         }
 
         // GET: ParkingSpots
@@ -61,7 +76,17 @@ namespace MVCGarage.Controllers
             else
                 parkingSpots = db.ParkingSpots();
 
-            return View(Sort(parkingSpots, sortOrder));
+            List<DetailsParkingSpotVM> viewModel = new List<DetailsParkingSpotVM>();
+
+            foreach (ParkingSpot parkingSpot in Sort(parkingSpots, sortOrder).ToList())
+                viewModel.Add(new DetailsParkingSpotVM
+                {
+                    Availability = Availability(parkingSpot),
+                    ParkingSpot = parkingSpot,
+                    Vehicle = new GarageController().Vehicle(parkingSpot.VehicleID)
+                });
+
+            return View(viewModel);
         }
 
         // GET: ParkingSpots/Details/5
@@ -76,7 +101,11 @@ namespace MVCGarage.Controllers
             {
                 return HttpNotFound();
             }
-            return View(parkingSpot);
+            return View(new DetailsParkingSpotVM
+            {
+                ParkingSpot = parkingSpot,
+                Vehicle = new GarageController().Vehicle(parkingSpot.VehicleID)
+            });
         }
 
         // GET: ParkingSpots/Create
@@ -85,10 +114,10 @@ namespace MVCGarage.Controllers
             if (viewModel.VehicleType == ETypeVehicle.undefined)
                 ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
 
-            if (viewModel.OriginActionName == null)
-                viewModel.OriginActionName = "Index";
-
-            return View(viewModel);
+            return View(new CreateParkingSpotsVM
+            {
+                DefaultFees = db.DefaultFees()
+            });
         }
 
         // POST: ParkingSpots/Create
@@ -100,13 +129,29 @@ namespace MVCGarage.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Check that the registration plate is still unique
+                if (db.ParkingSpotByIdentifiant(parkingSpot.Label) != null)
+                {
+                    ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+
+                    return View(new CreateParkingSpotsVM
+                    {
+                        ParkingSpot = parkingSpot,
+                        DefaultFees = db.DefaultFees(),
+                        ErrorMessage = "A parking spot with the same identifiant already exists!"
+                    });
+                }
+
+                if (parkingSpot.Fee == null)
+                    parkingSpot.Fee = db.DefaultFee(parkingSpot.VehicleType);
+
                 db.Add(parkingSpot);
                 return RedirectToAction("Index");
             }
 
             ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
 
-            return View(new CreateParkingSpotsVM { ParkingSpot = parkingSpot });
+            return View(new CreateParkingSpotsVM { ParkingSpot = parkingSpot, DefaultFees = db.DefaultFees() });
         }
 
         // GET: ParkingSpots/Edit/5
@@ -163,6 +208,27 @@ namespace MVCGarage.Controllers
         {
             db.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult SelectAParkingSpot(SelectAParkingSpotVM viewModel)
+        {
+            Vehicle vehicle = new GarageController().Vehicle(viewModel.VehicleID);
+
+            if (vehicle == null)
+                return RedirectToAction("BookAParkingSpot", "Vehicles", new { errorMessage = "You must select a vehicle!" });
+
+            // Allows the user to select an available parking spot (if any), depending on the type of vehicle
+            return View(new SelectAParkingSpotVM
+            {
+                VehicleID = viewModel.VehicleID,
+                SelectedVehicle = vehicle,
+                CheckIn = viewModel.CheckIn,
+                ErrorMessage = viewModel.ErrorMessage,
+                ParkingSpots = db.AvailableParkingSpots(vehicle.VehicleType),
+                FollowingActionName = viewModel.FollowingActionName,
+                FollowingControllerName = viewModel.FollowingControllerName
+            });
         }
 
         protected override void Dispose(bool disposing)

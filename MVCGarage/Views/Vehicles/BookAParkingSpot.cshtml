@@ -1,0 +1,28 @@
+﻿@model MVCGarage.ViewModels.Vehicles.SelectAVehicleVM
+
+@{
+    ViewBag.Title = "Book A Parking Spot";
+}
+<div class="header jumbotron">
+    <h1>Please select a vehicle you want to book a parking spot for</h1>
+    <hr />
+    <p>This is where you select the vehicle you would like to book a parking spot for</p>
+    <p style="color:red">@Model.ErrorMessage</p>
+</div>
+
+<p style="font-size: 3em; text-align: center; color: white;">
+    @Html.ActionLink("Add a new vehicle",
+                     "Create",
+                     "Vehicles",
+                     new MVCGarage.ViewModels.Vehicles.CreateVehicleVM
+                     {
+                         OriginActionName = "BookAParkingSpot",
+                         OriginControllerName = "Garage",
+                     },
+                     null)
+</p>
+
+@using (@Html.BeginForm())
+{
+    @Html.Partial("_SelectAVehiclePartial", Model)
+}

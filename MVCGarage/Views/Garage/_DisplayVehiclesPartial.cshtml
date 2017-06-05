@@ -17,14 +17,15 @@
                     @Html.ActionLink(htmlName, Model.ViewName, new { sortOrder = ViewBag.VehicleTypeSortParam })
                 </th>
                 <th>
-                    @{htmlName = @Html.DisplayNameFor(model => model.Vehicles.First().CheckInTime).ToHtmlString();}
+                    @{htmlName = @Html.DisplayNameFor(model => model.ParkingSpotsVehicles.Values.First().CheckInTime).ToHtmlString();}
                     @Html.ActionLink(htmlName, Model.ViewName, new { sortOrder = ViewBag.CheckInTimeSortParam })
                 </th>
                 <th>
                     @Html.ActionLink("Parking spot", Model.ViewName, new { sortOrder = ViewBag.ParkingSpotSortParam })
                 </th>
                 <th>
-                    @Html.ActionLink("Fee", Model.ViewName, new { sortOrder = ViewBag.FeeSortParam })
+                    @{htmlName = @Html.DisplayNameFor(model => model.ParkingSpotsVehicles.Values.First().Fee).ToHtmlString();}
+                    @Html.ActionLink(htmlName, Model.ViewName, new { sortOrder = ViewBag.FeeSortParam })
                 </th>
                 <th></th>
             </tr>
@@ -44,7 +45,14 @@
                         @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.VehicleType))
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CheckInTime)
+                        @if (parkingSpot != null)
+                        {
+                            @Html.DisplayFor(modelItem => parkingSpot.CheckInTime)
+                        }
+                        else if (bookedParkingSpot != null)
+                        {
+                            @Html.DisplayFor(modelItem => bookedParkingSpot.CheckInTime)
+                        }
                     </td>
                     <td>
                         @if (parkingSpot != null)
@@ -59,35 +67,44 @@
                     <td>
                         @if (parkingSpot != null)
                         {
-                            @Html.DisplayFor(modelItem => parkingSpot.Fee)<text>/min.</text>
+                            @parkingSpot.DisplayFee()
                         }
                         else if (bookedParkingSpot != null)
                         {
-                            @Html.DisplayName(string.Format("{0:N2}", bookedParkingSpot.MonthlyFee()))<text>/month</text>
+                            @bookedParkingSpot.DisplayMonthlyFee()
                         }
                     </td>
                     <td>
-                        @* Custom actions, depending on the parked/unparked status of the vehicle *@
+                        @* Custom actions, according to the parked/unparked status of the vehicle *@
                         @if (item.ParkingSpotID == null)
                         {
                             if (bookedParkingSpot == null)
                             {
-                                @Html.ActionLink("Check in", "CheckInAVehicle", "Garage", new { vehicleId = item.ID }, null)
+
+                                @Html.ActionLink("Check in",
+                                                 "CheckInAVehicle",
+                                                 new { vehicleId = item.ID })
+                                <text> | </text>
+                                @Html.ActionLink("Book a parking spot",
+                                                 "BookAParkingSpotForAVehicle",
+                                                 "Vehicles",
+                                                 new { vehicleId = item.ID },
+                                                 null)
+
                             }
                             else
                             {
                                 @Html.ActionLink("Unbook parking spot",
-                                                 "UnbookParkingSpot",
+                                                 "UnbookAParkingSpot",
                                                  new
                                                  {
-                                                     vehicleId = item.ID,
-                                                     parkingSpotId = bookedParkingSpot.ID
+                                                     vehicleId = item.ID
                                                  })
                             }
                         }
                         else
                         {
-                            @Html.ActionLink("Check out", "CheckOutAVehicle", "Garage", new { vehicleId = item.ID })
+                            @Html.ActionLink("Check out", "CheckOutAVehicle", new { vehicleId = item.ID })
                         }
                         | @Html.ActionLink("Details", "Details", "Vehicles", new { id = item.ID }, null)
                         @if (bookedParkingSpot == null && parkingSpot == null)

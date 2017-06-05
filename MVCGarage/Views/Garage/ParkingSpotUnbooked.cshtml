@@ -1,0 +1,122 @@
+﻿@model MVCGarage.ViewModels.Garage.ParkingSpotUnbooked
+@{
+    ViewBag.Title = "Unbook a Parking Spot";
+}
+
+<div class="header jumbotron">
+    <h1>Unbooking</h1>
+    <hr />
+    <p>Your Parking Spot has been unbooked</p>
+</div>
+
+<div style="color: white; margin-top: 10em; text-align: center;">
+    <h2 style="text-align: center;">Vehicle</h2>
+    <div class="index-table">
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicle.Owner)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicle.VehicleType)
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Vehicle.RegistrationPlate)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Vehicle.Owner)
+                </td>
+
+                <td>
+                    @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.Vehicle.VehicleType))
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <hr />
+    <h2 style="text-align: center;">Parking spot</h2>
+    <div class="index-table">
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayName("Check in time")
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkingSpot.Label)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkingSpot.Fee)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.CheckInTime)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.ParkingSpot.Label)
+                </td>
+
+                <td>
+                    @Model.ParkingSpot.DisplayMonthlyFee()
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <hr />
+    <h2 style="text-align: center;">Total amount</h2>
+    <div class="index-table">
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayName("Check in time:")
+                </th>
+                <th>
+                    @Html.DisplayName("Check out time:")
+                </th>
+                <th>
+                    @Html.DisplayName("Total time:")
+                </th>
+                <th>
+                    @Html.DisplayName("Total amount:")
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => Model.CheckInTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => Model.CheckOutTime)
+                </td>
+                <td>
+                    @Html.DisplayName(TimeSpan.FromDays(Model.NbMonths).ToString())
+                </td>
+                <td>
+                    @Html.DisplayFor(model => Model.NbMonths) *
+                    @Html.DisplayName(string.Format("{0:N2}", Model.ParkingSpot.MonthlyFee())) =
+                    @Html.DisplayName(string.Format("{0:N2}", Model.TotalAmount))
+                </td>
+
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div style="text-align: center; display: block; font-size: 2em; margin-bottom: 3em; color: white;">
+    <p>
+        @Html.ActionLink("Back to List", "DisplayAllVehicles")
+    </p>
+</div>

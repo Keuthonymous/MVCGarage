@@ -1,4 +1,4 @@
-﻿@model MVCGarage.Models.ParkingSpot
+﻿@model MVCGarage.ViewModels.ParkingSpots.DetailsParkingSpotVM
 
 @{
     ViewBag.Title = "Parking spot details";
@@ -13,35 +13,93 @@
 <div class="jumbotron" style="color: white; font-size: 1.35em;">
     <h2>ParkingSpot</h2>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.VehicleType)
-        </dt>
 
-        <dd>
-            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
-        </dd>
+    @{
+        bool available = false;
+        bool parked = false;
+        bool booked = false;
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Label)
-        </dt>
+        if (Model.Vehicle == null)
+        {
+            available = true;
+        }
+        else if (Model.Vehicle.ParkingSpotID == null)
+        {
+            booked = true;
+        }
+        else
+        {
+            parked = true;
+        }
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Label)
-        </dd>
+    <div class="index-table">
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayName("Availibility")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkingSpot.Label)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkingSpot.VehicleType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkingSpot.Fee)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @{
+                        if (available)
+                        {
+                            @Html.DisplayName("Available")
+                        }
+                        else if (booked)
+                        {
+                            @Html.DisplayName(string.Format("Booked for {0} ({1})",
+                                                            Model.Vehicle.RegistrationPlate,
+                                                            Model.Vehicle.Owner))
+                        }
+                        else if (parked)
+                        {
+                            @Html.DisplayName(string.Format("Taken by {0} ({1})",
+                                                            Model.Vehicle.RegistrationPlate,
+                                                            Model.Vehicle.Owner))
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.ParkingSpot.Label)
+                </td>
+                <td>
+                    @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.ParkingSpot.VehicleType))
+                </td>
+                <td>
+                    @{
+                        if (available || parked)
+                        {
+                            @Model.ParkingSpot.DisplayFee();
+                        }
+                        else if (booked)
+                        {
+                            @Model.ParkingSpot.DisplayMonthlyFee();
+                        }
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Fee)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fee)
-        </dd>
-    </dl>
     <br />
     <br />
+
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @if (Model.ParkingSpot.VehicleID == null)
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ParkingSpot.ID })<text> | </text>
+        }
         @Html.ActionLink("Back to List", "Index")
     </p>
 </div>

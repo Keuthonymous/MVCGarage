@@ -7,7 +7,6 @@ namespace MVCGarage.ViewModels.Vehicles
         public Vehicle Vehicle { get; set; }
         public string OriginActionName { get; set; }
         public string OriginControllerName { get; set; }
-
-        public bool DisplayCheckInTime { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

@@ -9,7 +9,11 @@
         <div class="header jumbotron">
             <h1>Vehicles currently registered</h1>
             <hr />
-            <p>These are the Vehicles that are currently parked</p>
+            <p>
+                These are the Vehicles that are currently parked
+                <br />
+                or have booked a parking spot
+            </p>
         </div>
 
         <p style="color: white; text-align: center; font-size: 2em;">
@@ -17,16 +21,16 @@
         </p>
 
         @{if (Model.Vehicles.Count() == 0)
-        {
-            <div class="about-body-text" style="color: white; margin-top: 3em; text-align: center;">
-                <h4>The garage is currently empty!</h4>
-                <hr />
-            </div>
-        }
-        else
-        {
-            @Html.Partial("_DisplayVehiclesPartial", Model)
-        }
+            {
+                <div class="about-body-text" style="color: white; margin-top: 3em; text-align: center;">
+                    <h4>The garage is currently empty!</h4>
+                    <hr />
+                </div>
+            }
+            else
+            {
+                @Html.Partial("_DisplayVehiclesPartial", Model)
+            }
         }
     </div>
 </div>

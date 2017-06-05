@@ -1,0 +1,118 @@
+﻿@model MVCGarage.ViewModels.ParkingSpots.SelectAParkingSpotVM
+
+@{
+    ViewBag.Title = "Select A Parking Spot";
+}
+
+<div class="header jumbotron">
+    <h1>Select a parking spot</h1>
+    <hr />
+    <p>This is where you select a parking spot</p>
+    <p style="color:red">@Model.ErrorMessage</p>
+</div>
+
+@using (@Html.BeginForm(Model.FollowingActionName, Model.FollowingControllerName, FormMethod.Post))
+{
+    if (Model.ParkingSpots.Count() == 0)
+    {
+        <div class="about-body-text" style="color: white; margin-top: 10em; text-align: center;">
+            <h4>All our parking spots for '@MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.SelectedVehicle.VehicleType)'</h4>
+            <h4>are unfortunately taken!</h4>
+            <hr />
+        </div>
+    }
+    else
+    {
+        <div class="about-body-text" style="color: white; margin-top: 10em; text-align: center;">
+            <div class="index-table">
+                <table>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SelectedVehicle.RegistrationPlate)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.SelectedVehicle.Owner)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.SelectedVehicle.VehicleType)
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => model.SelectedVehicle.RegistrationPlate)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => model.SelectedVehicle.Owner)
+                        </td>
+
+                        <td>
+                            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.SelectedVehicle.VehicleType))
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="index-table">
+            <table>
+                <tr>
+                    <th>
+                        @* Blank for the radiobutton *@
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ParkingSpots.First().Label)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ParkingSpots.First().Fee)
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.ParkingSpots)
+                    {
+                    <tr>
+                        <td>
+                            @if (Model.ParkingSpotID == item.ID)
+                            {
+                                @Html.RadioButtonFor(modelItem => Model.ParkingSpotID, item.ID, new { Checked = "checked" })
+                            }
+                            else
+                            {
+                                @Html.RadioButtonFor(modelItem => Model.ParkingSpotID, item.ID)
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Label)
+                        </td>
+                        <td>
+                            @if (Model.CheckIn)
+                            {
+                                @item.DisplayFee()
+                            }
+                            else
+                            {
+                                @item.DisplayMonthlyFee()
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+
+    <div style="text-align: center; display: block; margin-bottom: 3em; color: white; font-size: 2em;">
+        @if (Model.ParkingSpots.Count() > 0)
+                {
+            <input name="submit-button"
+                   type="submit"
+                   style="font-weight:bold;margin:10px 0 10px 0;"
+                   value="Choose the selected Parking Spot"
+                   class="btn btn-default" /><text> | </text>
+        }
+        @Html.ActionLink("Back to List", "Index", "Home")
+        @Html.HiddenFor(model => Model.VehicleID)
+    </div>
+}

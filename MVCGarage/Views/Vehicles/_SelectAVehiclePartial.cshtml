@@ -18,12 +18,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Vehicles.First().VehicleType)
                     </th>
-                    @if (Model.DisplayCheckInTime)
-                    {
-                        <th>
-                            @Html.DisplayNameFor(model => model.Vehicles.First().CheckInTime)
-                        </th>
-                    }
                 </tr>
 
                 @foreach (var item in Model.Vehicles)
@@ -49,15 +43,8 @@
                         <td>
                             @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.VehicleType))
                         </td>
-                        @if (Model.DisplayCheckInTime)
-                        {
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CheckInTime)
-                            </td>
-                        }
                     </tr>
                 }
-
             </table>
         </div>
     </div>
