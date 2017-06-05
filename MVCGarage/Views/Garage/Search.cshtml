@@ -1,75 +1,81 @@
 ﻿@model MVCGarage.ViewModels.Garage.SearchResultsVM
 
-<div>
-    <h4>Foudn Vehicle</h4>
-    <hr />
-    @if (Model.FoundVehicle == null)
-    {
-        <p>No Vehicle Registration Plate is matching '@Model.SearchedValue'.</p>
-    }
-    else
-    {
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.FoundVehicle.RegistrationPlate)
-            </dt>
+<div class="jumbotron" style="color: white;">
+    <div class="index-table">
+        <h1>Found Vehicle</h1>
+        <hr />
+        <p>Vehicle search results</p>
+        @if (Model.FoundVehicle == null)
+        {
+            <p>No Vehicle Registration Plate is matching '@Model.SearchedValue'.</p>
+        }
+        else
+        {
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FoundVehicle.RegistrationPlate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FoundVehicle.VehicleType)
+                    </th>
 
-            <dd>
-                @Html.DisplayFor(model => model.FoundVehicle.RegistrationPlate)
-            </dd>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FoundVehicle.Owner)
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.FoundVehicle.Owner)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FoundVehicle.RegistrationPlate)
+                    </td>
+                    <td>
+                        @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.FoundVehicle.VehicleType))
+                    </td>
+                </tr>
+            </table>
+        }
 
-            <dt>
-                @Html.DisplayNameFor(model => model.FoundVehicle.Owner)
-            </dt>
+        <h1>Found Parking Spot</h1>
+        <hr />
+        @if (Model.FoundParkingSpot == null)
+        {
+            <p>No Parking Spot Identifiant is matching '@Model.SearchedValue'.</p>
+        }
+        else
+        {
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FoundParkingSpot.Label)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FoundParkingSpot.CheckInTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FoundParkingSpot.Fee)
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.FoundParkingSpot.Fee)
+                    </td>
 
-            <dd>
-                @Html.DisplayFor(model => model.FoundVehicle.Owner)
-            </dd>
+                    <td>
+                        @Html.DisplayFor(model => model.FoundParkingSpot.Label)
+                    </td>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.FoundVehicle.VehicleType)
-            </dt>
+                    <td>
+                        @Html.DisplayFor(model => model.FoundParkingSpot.CheckInTime)
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
 
-            <dd>
-                @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.FoundVehicle.VehicleType))
-            </dd>
-        </dl>
-    }
-    <h4>Found Parking Spot</h4>
-    <hr />
-    @if (Model.FoundVehicle == null)
-    {
-        <p>No Parking Spot Identifiant is matching '@Model.SearchedValue'.</p>
-    }
-    else
-    {
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.FoundParkingSpot.Label)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.FoundParkingSpot.Label)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.FoundParkingSpot.Fee)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.FoundParkingSpot.Fee)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.FoundParkingSpot.CheckInTime)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.FoundParkingSpot.CheckInTime)
-            </dd>
-        </dl>
-    }
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
