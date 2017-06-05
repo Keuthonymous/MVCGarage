@@ -136,6 +136,11 @@ namespace MVCGarage.Controllers
                 return innerJoin.ParkingSpot.GetFee();
         }
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult DisplayAllVehicles(string sortOrder)
         {
             Dictionary<int, ParkingSpot> dicParkingSpotsVehicles = new Dictionary<int, ParkingSpot>();
@@ -199,27 +204,6 @@ namespace MVCGarage.Controllers
                 BookedParkingSpots = dicBookedParkingSpots
             });
         }
-
-        //[HttpGet]
-        //public ActionResult SelectAParkingSpot(SelectAParkingSpotVM viewModel)
-        //{
-        //    Vehicle vehicle = vehicles.Vehicle(viewModel.VehicleID);
-
-        //    // Happends if the user clicks on "Submit" without having selected a vehicle
-        //    // or if the URL is manually entered
-        //    if (vehicle == null)
-        //        return RedirectToAction("Index", "Home");
-
-        //    // Allows the user to select an available parking spot (if any), depending on the type of vehicle
-        //    return RedirectToAction("SelectAParkingSpot",
-        //                            "ParkingSpots",
-        //                            new 
-        //                            {
-        //                                vehicleId = viewModel.VehicleID,
-        //                                checkIn = viewModel.CheckIn,
-        //                                errorMessage = viewModel.ErrorMessage,
-        //                            });
-        //}
 
         [HttpGet]
         public ActionResult ParkingSpotBooked(SelectAParkingSpotVM viewModel)
