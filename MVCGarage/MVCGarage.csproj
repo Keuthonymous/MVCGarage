@@ -245,6 +245,7 @@
     <Content Include="Views\Garage\ParkingSpotUnbooked.cshtml" />
     <Content Include="Views\Vehicles\UnbookParkingSpot.cshtml" />
     <Content Include="Views\Garage\Search.cshtml" />
+    <Content Include="Views\Garage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
