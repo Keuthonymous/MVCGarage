@@ -241,17 +241,17 @@ namespace MVCGarage.Controllers
         public ActionResult ParkingSpotUnbooked(int? vehicleId)
         {
             if (vehicleId == null)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
 
             Vehicle vehicle = vehicles.Vehicle(vehicleId);
 
             if (vehicle == null)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
 
             ParkingSpot parkingSpot = parkingSpots.BookedParkingSpot(vehicle.ID);
 
             if (parkingSpot == null)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
 
             // Check out the vehicle ID to the parking spot
             DateTime now = DateTime.Now;
@@ -278,7 +278,7 @@ namespace MVCGarage.Controllers
             Vehicle vehicle = vehicles.Vehicle(vehicleId);
 
             if (vehicle == null)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
 
             return RedirectToAction("SelectAParkingSpot",
                                     "ParkingSpots",
@@ -339,17 +339,17 @@ namespace MVCGarage.Controllers
         public ActionResult VehicleCheckedOut(int? vehicleId)
         {
             if (vehicleId == null)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
 
             Vehicle vehicle = vehicles.Vehicle(vehicleId);
 
             if (vehicle == null)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
 
             ParkingSpot parkingSpot = parkingSpots.ParkingSpot(vehicle.ParkingSpotID);
 
             if (parkingSpot == null)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
 
             // Check out the vehicle ID to the parking spot
             DateTime now = DateTime.Now;
