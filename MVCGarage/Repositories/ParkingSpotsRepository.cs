@@ -10,6 +10,12 @@ namespace MVCGarage.Repositories
     public class ParkingSpotsRepository : IDisposable
     {
         private GarageContext db = new GarageContext();
+        //private Dictionary<ETypeVehicle, double> DefaultFees = new Dictionary<ETypeVehicle, double> { 
+        //{ETypeVehicle.car, 0.20 },
+        //{ETypeVehicle.car, 0.20 },
+        //{ETypeVehicle.car, 0.20 },
+        //{ETypeVehicle.car, 0.20 }};
+
 
         public IEnumerable<ParkingSpot> ParkingSpots()
         {
