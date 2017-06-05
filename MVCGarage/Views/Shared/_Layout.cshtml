@@ -19,30 +19,32 @@
                 @Html.ActionLink("Garage using MVC", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vehicles management<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("All vehicles", "DisplayAllVehicles", "Garage")</li>
-                            <li>@Html.ActionLink("Parked vehicles", "DisplayParkedVehicles", "Garage")</li>
-                            <li>@Html.ActionLink("Check in", "CheckInVehicle", "Vehicles")</li>
-                            <li>@Html.ActionLink("Check out", "CheckOutVehicle", "Vehicles")</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Parking places management<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Manage parking spots", "Index", "ParkingSpots")</li>
-                            <li>@Html.ActionLink("Book a spot", "BookAParkingSpot", "Vehicles")</li>
-                            <li>@Html.ActionLink("Unbook a spot", "UnbookParkingSpot", "Vehicles")</li>
-                        </ul>
-                    </li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li style="float: right;" class="search"><input type="text" name="search" placeholder="Search.." /></li>
-                    <li><input type="submit" /></li>
-                </ul>
+                <form id="frmsearch" action="~/Garage/Search" methond="get">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vehicles management<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("All vehicles", "DisplayAllVehicles", "Garage")</li>
+                                <li>@Html.ActionLink("Parked vehicles", "DisplayParkedVehicles", "Garage")</li>
+                                <li>@Html.ActionLink("Check in", "CheckInVehicle", "Vehicles")</li>
+                                <li>@Html.ActionLink("Check out", "CheckOutVehicle", "Vehicles")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Parking places management<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Manage parking spots", "Index", "ParkingSpots")</li>
+                                <li>@Html.ActionLink("Book a spot", "BookAParkingSpot", "Vehicles")</li>
+                                <li>@Html.ActionLink("Unbook a spot", "UnbookParkingSpot", "Vehicles")</li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li class="search"><input type="text" name="searchedValue" placeholder="Search.." /></li>
+                        <li style="margin:10px 10px;"><input type="submit" class="btn btn-default"/></li>
+                    </ul>
+                </form>
             </div>
         </div>
     </div>
