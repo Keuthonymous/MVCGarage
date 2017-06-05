@@ -165,6 +165,7 @@
     <Compile Include="Repositories\VehicleRepository.cs" />
     <Compile Include="ViewModels\Garage\DisplayVehiclesVM.cs" />
     <Compile Include="ViewModels\Garage\ParkingSpotUnbooked.cs" />
+    <Compile Include="ViewModels\Garage\SearchResultsVM.cs" />
     <Compile Include="ViewModels\ParkingSpots\DetailsParkingSpotVM.cs" />
     <Compile Include="ViewModels\ParkingSpots\SelectAParkingSpotVM.cs" />
     <Compile Include="ViewModels\Garage\BookedParkingSpotVM.cs" />
@@ -243,6 +244,7 @@
     <Content Include="Views\Vehicles\CheckInVehicle.cshtml" />
     <Content Include="Views\Garage\ParkingSpotUnbooked.cshtml" />
     <Content Include="Views\Vehicles\UnbookParkingSpot.cshtml" />
+    <Content Include="Views\Garage\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
