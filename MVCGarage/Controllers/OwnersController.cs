@@ -16,6 +16,59 @@ namespace MVCGarage.Controllers
     {
         private OwnersRepository db = new OwnersRepository();
 
+        public IEnumerable<Owner> Sort(IEnumerable<Owner> list, string sortOrder)
+        {
+            ViewBag.LabelSortParam = string.IsNullOrEmpty(sortOrder) ? "ID_desc" : "ID_asc";
+            ViewBag.FNameSortParam = sortOrder == "Fname_asc" ? "Fname_desc" : "Fname_asc";
+            ViewBag.LnameSortParam = sortOrder == "Lname_asc" ? "Lname_desc" : "Lname_asc";
+            ViewBag.GenderSortParam = sortOrder == "Gender_asc" ? "Gender_desc" : "Gender_asc";
+            ViewBag.LiNumSortParam = sortOrder == "LiNum_asc" ? "LiNum_desc" : "LiNum_asc";
+
+            switch (sortOrder)
+            { 
+                case "ID_desc":
+                    list = list.OrderByDescending(o => o.ID);
+                    break;
+
+                case "Fname_asc":
+                    list = list.OrderBy(o => o.Fname);
+                    break;
+
+                case "Fname_desc":
+                    list = list.OrderByDescending(o => o.Fname);
+                    break;
+
+                case "Lname_asc":
+                    list = list.OrderBy(o => o.Lname);
+                    break;
+
+                case "Lname_desc":
+                    list = list.OrderByDescending(o => o.Lname);
+                    break;
+
+                case "Gender_asc":
+                    list = list.OrderBy(o => o.Gender);
+                    break;
+
+                case "Gender_desc":
+                    list = list.OrderByDescending(o => o.Gender);
+                    break;
+
+                case "LiNum_asc":
+                    list = list.OrderBy(o => o.LicenseNumber);
+                    break;
+
+                case "LiNum_desc":
+                    list = list.OrderByDescending(o => o.LicenseNumber);
+                    break;
+
+                default:
+                    list = list.OrderBy(o => o.ID);
+                    break;
+            }
+            return list;
+        }
+
         // GET: Owners
         public ActionResult Index()
         {

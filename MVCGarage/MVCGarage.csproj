@@ -260,6 +260,8 @@
     <Content Include="Views\Owners\Index.cshtml" />
     <Content Include="Views\Owners\Details.cshtml" />
     <Content Include="Views\Owners\Create.cshtml" />
+    <Content Include="Views\Owners\Edit.cshtml" />
+    <Content Include="Views\Owners\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
