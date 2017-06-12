@@ -254,6 +254,7 @@
     <Content Include="Views\Garage\Search.cshtml" />
     <Content Include="Views\Garage\Index.cshtml" />
     <Content Include="Views\Owners\Index.cshtml" />
+    <Content Include="Views\Owners\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
