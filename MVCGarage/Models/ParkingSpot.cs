@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVCGarage.Models
 {
@@ -9,14 +11,8 @@ namespace MVCGarage.Models
         [Display(Name = "ID")]
         public int ID { get; set; }
 
-        [Display(Name = "Vehicle ID")]
-        public int? VehicleID { get; set; }
-
         [Display(Name = "Identifiant")]
         public string Label { get; set; }
-
-        [Display(Name = "Check in time")]
-        public DateTime? CheckInTime { get; set; }
 
         [Display(Name = "Fee")]
         public double? Fee { get; set; }
@@ -39,13 +35,21 @@ namespace MVCGarage.Models
             return string.Format("{0:N2}/month", MonthlyFee());
         }
 
-        [Display(Name = "Reserved vehicle type")]
-        public ETypeVehicle VehicleType { get; set; }
-
         [Display(Name = "Monthly fee")]
         public double MonthlyFee()
         {
             return Math.Round(70 * 30 * 24 * 60 * GetFee() / 100, 2, MidpointRounding.AwayFromZero);
         }
+
+        // Navigation property - Allows the 1..1 relation to the "VehicleType" table
+        [ForeignKey("VehicleType")]
+        public int VehicleTypeID { get; set; }
+
+        public virtual VehicleType VehicleType { get; set; }
+        // --- //
+
+        // Navigation property - Allows the 1..* relation to the "CheckIn" table
+        public virtual ICollection<CheckIn> CheckIns { get; set; }
+        // --- //
     }
 }

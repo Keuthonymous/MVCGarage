@@ -149,7 +149,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CheckInsController.cs" />
     <Compile Include="Controllers\CheckInsParkingSpots.cs" />
-    <Compile Include="Controllers\GarageController_notcompiling.cs" />
+    <Compile Include="Controllers\GarageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OwnersController.cs" />
     <Compile Include="Controllers\CheckInsVehicles.cs" />
@@ -169,11 +169,11 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CheckIn.cs" />
     <Compile Include="Models\Owner.cs" />
-    <Compile Include="Models\ParkingSpot_notcompiling.cs">
+    <Compile Include="Models\ParkingSpot.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\VehicleType.cs" />
-    <Compile Include="Models\Vehicle_notcompiling.cs">
+    <Compile Include="Models\Vehicle.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -182,6 +182,7 @@
     <Compile Include="Repositories\ParkingSpotsRepository.cs" />
     <Compile Include="Repositories\VehiclesRepository.cs" />
     <Compile Include="Repositories\VehicleTypeRepository.cs" />
+    <Compile Include="ViewModels\Owners\DetailsRegisteredOwnersVM.cs" />
     <Compile Include="ViewModels\Shared\DisplayVehiclesVM.cs" />
     <Compile Include="ViewModels\CheckIns\ParkingSpotUnbooked.cs" />
     <Compile Include="ViewModels\Garage\SearchResultsVM.cs" />
