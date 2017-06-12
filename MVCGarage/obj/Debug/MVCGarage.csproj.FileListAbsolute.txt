@@ -578,3 +578,4 @@ C:\Users\elev\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.dll
 C:\Users\elev\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.pdb
 C:\Users\elev\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.OwnersModel.resources
 C:\Users\elev\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.csproj.GenerateResource.Cache
+C:\Users\elev\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.BecauseItSaidTo.resources
