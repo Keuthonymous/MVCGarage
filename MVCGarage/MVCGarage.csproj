@@ -147,10 +147,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\GarageController.cs" />
+    <Compile Include="Controllers\CheckInsController.cs" />
+    <Compile Include="Controllers\CheckInsParkingSpots.cs" />
+    <Compile Include="Controllers\GarageController_notcompiling.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OwnersController.cs" />
+    <Compile Include="Controllers\CheckInsVehicles.cs" />
     <Compile Include="Controllers\ParkingSpotsController.cs" />
+    <Compile Include="Controllers\PopulateVehicleTypes.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="DataAccess\GarageContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -160,24 +164,32 @@
     <Compile Include="Migrations\201706120845212_OwnersModel.Designer.cs">
       <DependentUpon>201706120845212_OwnersModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706120949442_CheckIn.cs" />
+    <Compile Include="Migrations\201706120949442_CheckIn.Designer.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\EnumHelper.cs" />
-    <Compile Include="Models\ETypeVehicle.cs" />
+    <Compile Include="Models\CheckIn.cs" />
     <Compile Include="Models\Owner.cs" />
-    <Compile Include="Models\ParkingSpot.cs" />
-    <Compile Include="Models\Vehicle.cs" />
+    <Compile Include="Models\ParkingSpot_notcompiling.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\VehicleType.cs" />
+    <Compile Include="Models\Vehicle_notcompiling.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CheckInsRepository.cs" />
     <Compile Include="Repositories\OwnersRepository.cs" />
     <Compile Include="Repositories\ParkingSpotsRepository.cs" />
-    <Compile Include="Repositories\VehicleRepository.cs" />
+    <Compile Include="Repositories\VehiclesRepository.cs" />
+    <Compile Include="Repositories\VehicleTypeRepository.cs" />
     <Compile Include="ViewModels\Shared\DisplayVehiclesVM.cs" />
-    <Compile Include="ViewModels\Garage\ParkingSpotUnbooked.cs" />
+    <Compile Include="ViewModels\CheckIns\ParkingSpotUnbooked.cs" />
     <Compile Include="ViewModels\Garage\SearchResultsVM.cs" />
     <Compile Include="ViewModels\Shared\DetailsParkingSpotVM.cs" />
     <Compile Include="ViewModels\ParkingSpots\SelectAParkingSpotVM.cs" />
-    <Compile Include="ViewModels\Garage\BookedParkingSpotVM.cs" />
-    <Compile Include="ViewModels\Garage\VehicleCheckedInVM.cs" />
-    <Compile Include="ViewModels\Garage\VehicleCheckedOutVM.cs" />
+    <Compile Include="ViewModels\CheckIns\BookedParkingSpotVM.cs" />
+    <Compile Include="ViewModels\CheckIns\VehicleCheckedInVM.cs" />
+    <Compile Include="ViewModels\CheckIns\VehicleCheckedOutVM.cs" />
     <Compile Include="ViewModels\ParkingSpots\CreateParkingSpotsVM.cs" />
     <Compile Include="ViewModels\ParkingSpots\EditParkingSpotVM.cs" />
     <Compile Include="ViewModels\Vehicles\CreateVehicleVM.cs" />
@@ -239,22 +251,27 @@
     <Content Include="Views\Vehicles\Details.cshtml" />
     <Content Include="Views\Vehicles\Edit.cshtml" />
     <Content Include="Views\ParkingSpots\SelectAParkingSpot.cshtml" />
-    <Content Include="Views\Garage\ParkingSpotBooked.cshtml" />
-    <Content Include="Views\Garage\VehicleCheckedIn.cshtml" />
+    <Content Include="Views\CheckIns\ParkingSpotBooked.cshtml" />
+    <Content Include="Views\CheckIns\VehicleCheckedIn.cshtml" />
     <Content Include="Views\Garage\DisplayAllVehicles.cshtml" />
     <Content Include="Views\Garage\DisplayParkedVehicles.cshtml" />
     <Content Include="Views\Garage\_DisplayVehiclesPartial.cshtml" />
-    <Content Include="Views\Garage\VehicleCheckedOut.cshtml" />
+    <Content Include="Views\CheckIns\VehicleCheckedOut.cshtml" />
     <Content Include="Views\Vehicles\BookAParkingSpot.cshtml" />
     <Content Include="Views\Vehicles\CheckOutVehicle.cshtml" />
     <Content Include="Views\Vehicles\_SelectAVehiclePartial.cshtml" />
     <Content Include="Views\Vehicles\CheckInVehicle.cshtml" />
-    <Content Include="Views\Garage\ParkingSpotUnbooked.cshtml" />
+    <Content Include="Views\CheckIns\ParkingSpotUnbooked.cshtml" />
     <Content Include="Views\Vehicles\UnbookParkingSpot.cshtml" />
     <Content Include="Views\Garage\Search.cshtml" />
     <Content Include="Views\Garage\Index.cshtml" />
     <Content Include="Views\Owners\Index.cshtml" />
     <Content Include="Views\Owners\Details.cshtml" />
+    <Content Include="Views\CheckIns\Create.cshtml" />
+    <Content Include="Views\CheckIns\Delete.cshtml" />
+    <Content Include="Views\CheckIns\Details.cshtml" />
+    <Content Include="Views\CheckIns\Edit.cshtml" />
+    <Content Include="Views\CheckIns\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -275,6 +292,7 @@
     <EmbeddedResource Include="Migrations\201706120845212_OwnersModel.resx">
       <DependentUpon>201706120845212_OwnersModel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706120949442_CheckIn.resx" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

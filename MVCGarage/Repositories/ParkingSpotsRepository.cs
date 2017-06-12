@@ -10,21 +10,21 @@ namespace MVCGarage.Repositories
     public class ParkingSpotsRepository : IDisposable
     {
         private GarageContext db = new GarageContext();
-        private Dictionary<ETypeVehicle, double> defaultFees = new Dictionary<ETypeVehicle, double> {
-        {ETypeVehicle.car, 0.20 },
-        {ETypeVehicle.motorcycle, 0.50 },
-        {ETypeVehicle.truck, 0.80 },
-        {ETypeVehicle.bus, 1.00 }};
+        private Dictionary<int, double> defaultFees = new Dictionary<int, double> {
+        {1, 0.20 },
+        {2, 0.50 },
+        {3, 0.80 },
+        {4, 1.00 }};
 
-        public Dictionary<ETypeVehicle, double> DefaultFees()
+        public Dictionary<int, double> DefaultFees()
         {
             return defaultFees;
         }
 
-        public double DefaultFee(ETypeVehicle vehicleType)
+        public double DefaultFee(int vehicleTypeId)
         {
-            if (defaultFees.ContainsKey(vehicleType))
-                return defaultFees[vehicleType];
+            if (defaultFees.ContainsKey(vehicleTypeId))
+                return defaultFees[vehicleTypeId];
             else
                 return 0;
         }
@@ -32,6 +32,11 @@ namespace MVCGarage.Repositories
         public IEnumerable<ParkingSpot> ParkingSpots()
         {
             return db.ParkingSpots;
+        }
+
+        public IEnumerable<ParkingSpot> ParkingSpots(int? vehicleTypeId)
+        {
+            return ParkingSpots().Where(p => vehicleTypeId == null || p.VehicleTypeID == vehicleTypeId);
         }
 
         public ParkingSpot ParkingSpot(int? id)
@@ -49,16 +54,6 @@ namespace MVCGarage.Repositories
             return ParkingSpots().Where(p => p.Label.ToUpper().Contains(label.ToUpper()));
         }
 
-        public IEnumerable<ParkingSpot> AvailableParkingSpots(ETypeVehicle vehicleType = ETypeVehicle.undefined)
-        {
-            return ParkingSpots().Where(p => (vehicleType == ETypeVehicle.undefined || p.VehicleType == vehicleType) && p.VehicleID == null);
-        }
-
-        public ParkingSpot FirstAvailableParkingSpot(ETypeVehicle vehicleType)
-        {
-            return AvailableParkingSpots(vehicleType).FirstOrDefault();
-        }
-
         public void Add(ParkingSpot parkingSpot)
         {
             db.ParkingSpots.Add(parkingSpot);
@@ -69,39 +64,6 @@ namespace MVCGarage.Repositories
         {
             db.Entry(parkingSpot).State = EntityState.Modified;
             SaveChanges();
-        }
-
-        public bool CheckIn(int parkingSpotId, int vehicleId)
-        {
-            ParkingSpot parkingSpot = ParkingSpot(parkingSpotId);
-
-            if (parkingSpot == null)
-                return false;
-            else
-            {
-                parkingSpot.VehicleID = vehicleId;
-                parkingSpot.CheckInTime = DateTime.Now;
-                Edit(parkingSpot);
-            }
-
-            return true;
-        }
-
-        public void CheckOut(int? parkingSpotId)
-        {
-            if (parkingSpotId != null)
-            {
-                ParkingSpot parkingSpot = ParkingSpot(parkingSpotId);
-
-                parkingSpot.VehicleID = null;
-                parkingSpot.CheckInTime = null;
-                Edit(parkingSpot);
-            }
-        }
-
-        public ParkingSpot BookedParkingSpot(int vehicleId)
-        {
-            return ParkingSpots().SingleOrDefault(p => p.VehicleID == vehicleId);
         }
 
         public void Delete(int id)

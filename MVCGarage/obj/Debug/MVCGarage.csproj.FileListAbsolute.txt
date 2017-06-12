@@ -139,7 +139,6 @@ C:\Users\Keuthonymous\Source\Repos\MVCGarage2\MVCGarage\bin\Microsoft.AI.Windows
 C:\Users\Keuthonymous\Source\Repos\MVCGarage2\MVCGarage\bin\Microsoft.AI.Web.xml
 C:\Users\Keuthonymous\Source\Repos\MVCGarage2\MVCGarage\obj\Debug\MVCGarage.dll
 C:\Users\Keuthonymous\Source\Repos\MVCGarage2\MVCGarage\obj\Debug\MVCGarage.pdb
-C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.Initial.resources
 C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.csproj.GenerateResource.Cache
 C:\Users\wille\Source\Repos\MVCGarage\MVCGarage\bin\ApplicationInsights.config
 C:\Users\wille\Source\Repos\MVCGarage\MVCGarage\bin\roslyn\csc.exe
@@ -213,7 +212,6 @@ C:\Users\wille\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.I
 C:\Users\wille\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.csproj.GenerateResource.Cache
 C:\Users\wille\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.dll
 C:\Users\wille\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.pdb
-C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.Initial1.resources
 C:\Users\Lina\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.csprojResolveAssemblyReference.cache
 C:\Users\Lina\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.Initial.resources
 C:\Users\Lina\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.Initial1.resources
@@ -578,3 +576,6 @@ C:\Users\elev\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.dll
 C:\Users\elev\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.pdb
 C:\Users\elev\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.OwnersModel.resources
 C:\Users\elev\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.csproj.GenerateResource.Cache
+C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.csprojResolveAssemblyReference.cache
+C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.OwnersModel.resources
+C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.201706120949442_CheckIn.resources

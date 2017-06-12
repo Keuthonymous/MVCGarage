@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MVCGarage.Models;
 using MVCGarage.DataAccess;
+using System.Web.WebPages.Html;
 
 namespace MVCGarage.Repositories
 {
@@ -11,6 +12,5 @@ namespace MVCGarage.Repositories
     {
         private GarageContext db = new GarageContext();
 
-        
     }
 }

@@ -9,7 +9,7 @@ namespace MVCGarage.Controllers
 {
     public class VehiclesController : Controller
     {
-        private VehicleRepository db = new VehicleRepository();
+        private VehiclesRepository db = new VehiclesRepository();
 
         // GET: Vehicles/Details/5
         public ActionResult Details(int? id)
@@ -29,7 +29,7 @@ namespace MVCGarage.Controllers
         // GET: Vehicles/Create
         public ActionResult Create(CreateVehicleVM viewModel)
         {
-            ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+            ViewBag.SelectVehicleTypes = PopulateVehicleTypes.PopulateDropList();
 
             if (viewModel.OriginActionName == null)
                 viewModel.OriginActionName = "DisplayAllVehicles";
@@ -54,7 +54,7 @@ namespace MVCGarage.Controllers
                 // Check that the registration plate is still unique
                 if (db.VehicleByRegistrationPlate(vehicle.RegistrationPlate) != null)
                 {
-                    ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+                    ViewBag.SelectVehicleTypes = PopulateVehicleTypes.PopulateDropList();
 
                     return View(new CreateVehicleVM
                     {
@@ -74,7 +74,7 @@ namespace MVCGarage.Controllers
                 });
             }
 
-            ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+            ViewBag.SelectVehicleTypes = PopulateVehicleTypes.PopulateDropList();
 
             return View(new CreateVehicleVM
             {
@@ -97,7 +97,7 @@ namespace MVCGarage.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+            ViewBag.SelectVehicleTypes = PopulateVehicleTypes.PopulateDropList();
 
             return View(vehicle);
         }
@@ -149,7 +149,7 @@ namespace MVCGarage.Controllers
             return View(new SelectAVehicleVM
             {
                 ErrorMessage = errorMessage,
-                Vehicles = db.UnparkedVehicles(),
+                Vehicles =new CheckInsVehicles().UnparkedVehicles(),
                 VehicleID = viewModel.VehicleID,
             });
         }
@@ -170,7 +170,7 @@ namespace MVCGarage.Controllers
             // or to create a new one
             return View(new SelectAVehicleVM
             {
-                Vehicles = db.ParkedVehicles(),
+                Vehicles = new CheckInsVehicles().ParkedVehicles(),
                 ErrorMessage = errorMessage
             });
         }
@@ -190,7 +190,7 @@ namespace MVCGarage.Controllers
             return View(new SelectAVehicleVM
             {
                 ErrorMessage = errorMessage,
-                Vehicles = db.UnparkedVehicles()
+                Vehicles = new CheckInsVehicles().UnparkedVehicles()
             });
         }
 

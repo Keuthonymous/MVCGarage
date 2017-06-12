@@ -1,0 +1,58 @@
+﻿@model MVCGarage.Models.CheckIn
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CheckIn</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ParkingSpot.Label)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParkingSpot.Label)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Owner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Owner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckInTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckInTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Booked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Booked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Free)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Free)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

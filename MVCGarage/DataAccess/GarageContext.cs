@@ -9,8 +9,10 @@ namespace MVCGarage.DataAccess
 {
     public class GarageContext : DbContext
     {
+        public DbSet<VehicleType> VehicleTypes { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<ParkingSpot> ParkingSpots { get; set; }
+        public DbSet<CheckIn> CheckIns { get; set; }
         public DbSet<Owner> Owners { get; set; }
 
         public GarageContext()
