@@ -10,6 +10,14 @@ namespace MVCGarage.Models
     {
         [Key]
         public int ID { get; set; }
-    
+
+        [Required]
+        public string Fname { get; set; }
+        [Required]
+        public string Lname { get; set; }
+        
+        [StringLength(1, ErrorMessage = "Please enter M for male and F for female")]
+        public string Gender { get; set; }
+        public string LicenseNumber { get; set; }
     }
 }
