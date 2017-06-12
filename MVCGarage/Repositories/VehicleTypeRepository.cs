@@ -11,6 +11,15 @@ namespace MVCGarage.Repositories
     {
         private GarageContext db = new GarageContext();
 
-        
+        public VehicleType VehicleID(int? id)
+        {
+            return db.VehicleID.Find(id);
+        }
+
+        public IEnumerable<VehicleType> VehicleTypes()
+        {
+            return db.VehicleTypes;
+        }
+
     }
 }

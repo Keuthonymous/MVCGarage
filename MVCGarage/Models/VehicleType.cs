@@ -11,7 +11,7 @@ namespace MVCGarage.Models
         [Display(Name = "ID")]
         public int ID { get; set; }
 
-        [Displa(Name = "Vehicle Type")]
+        [Display(Name = "Vehicle Type")]
         public string VehicleType { get; set; }
 
         internal void CheckOut()
