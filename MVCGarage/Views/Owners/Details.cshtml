@@ -1,0 +1,56 @@
+﻿@model MVCGarage.Models.Owner
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="header jumbotron">
+    <h2>Details</h2>
+    <hr />
+    <p>This is where you can view details for the selected owner</p>
+</div>
+<div>
+    <h1 style="text-align: center; color: white;">Owner</h1>
+    <hr />
+    <div class="index-table">
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fname)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Lname)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LicenseNumber)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Fname)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Lname)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Gender)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.LicenseNumber)
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div style="text-align:center; display:block; font-size: 2em; margin-bottom: 3em; color: white;">
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
