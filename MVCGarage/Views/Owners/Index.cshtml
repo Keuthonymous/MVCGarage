@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MVCGarage.Models.Owner>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron header">
+    <h2>Owners</h2>
+    <hr />
+    <p>This is where you can see all registered Owners</p>
+</div>
+
+<p style="font-size: 2em; text-align: center;">
+    @Html.ActionLink("Register a new owner", "Create")
+</p>
+<div class="index-table">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LicenseNumber)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicenseNumber)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
