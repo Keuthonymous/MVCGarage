@@ -11,6 +11,7 @@ namespace MVCGarage.DataAccess
     {
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<ParkingSpot> ParkingSpots { get; set; }
+        public DbSet<Owner> Owners { get; set; }
 
         public GarageContext()
             : base("DefaultConnection")
