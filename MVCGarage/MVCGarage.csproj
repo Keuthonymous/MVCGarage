@@ -160,6 +160,10 @@
     <Compile Include="Migrations\201706120845212_OwnersModel.Designer.cs">
       <DependentUpon>201706120845212_OwnersModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706121113124_BecauseItSaidTo.cs" />
+    <Compile Include="Migrations\201706121113124_BecauseItSaidTo.Designer.cs">
+      <DependentUpon>201706121113124_BecauseItSaidTo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EnumHelper.cs" />
     <Compile Include="Models\ETypeVehicle.cs" />
@@ -255,6 +259,7 @@
     <Content Include="Views\Garage\Index.cshtml" />
     <Content Include="Views\Owners\Index.cshtml" />
     <Content Include="Views\Owners\Details.cshtml" />
+    <Content Include="Views\Owners\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -274,6 +279,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706120845212_OwnersModel.resx">
       <DependentUpon>201706120845212_OwnersModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706121113124_BecauseItSaidTo.resx">
+      <DependentUpon>201706121113124_BecauseItSaidTo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
