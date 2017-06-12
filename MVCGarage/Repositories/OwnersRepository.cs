@@ -34,5 +34,41 @@ namespace MVCGarage.Repositories
             db.Entry(owner).State = EntityState.Modified;
             db.SaveChanges();
         }
+
+        public IEnumerable<Owner> GetOwnersByFirstName(string name)
+        {
+            var query = from o in db.Owners
+                        where o.Fname == name
+                        select o;
+
+            return query;
+        }
+
+        public IEnumerable<Owner> GetOwnersByLastName(string name)
+        {
+            var query = from o in db.Owners
+                        where o.Lname == name
+                        select o;
+
+            return query;
+        }
+
+        public IEnumerable<Owner> GetOwnersByGender(string gen)
+        {
+            var query = from o in db.Owners
+                        where o.Gender == gen
+                        select o;
+
+            return query;
+        }
+
+        public Owner GetOwnerByLiNum(string LiNum)
+        {
+            var query = (from o in db.Owners
+                         where o.LicenseNumber.Contains(LiNum)
+                         select o).FirstOrDefault();
+
+            return query;
+        }
     }
 }
