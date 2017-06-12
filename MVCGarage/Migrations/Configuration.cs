@@ -32,6 +32,11 @@ namespace MVCGarage.Migrations
                 new Vehicle { RegistrationPlate = "ABC128", VehicleType = ETypeVehicle.truck, Owner = "Owner Six" },
                 new Vehicle { RegistrationPlate = "ABC129", VehicleType = ETypeVehicle.bus, Owner = "Owner Seven" });
 
+            context.Owners.AddOrUpdate(o => o.ID,
+                new Owner { Fname = "Mike", Lname = "Daughtrey", Gender = "M", LicenseNumber = "ABC-123-DEF" },
+                new Owner { Fname = "Wilhelm", Lname = "Hansson", Gender = "M", LicenseNumber = "ABC-124-DEF" },
+                new Owner { Fname = "Liam", Lname = "Nottoosure", Gender = "M", LicenseNumber = "ABC-125-DEF" });
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
