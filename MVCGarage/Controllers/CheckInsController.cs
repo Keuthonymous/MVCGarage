@@ -15,115 +15,115 @@ namespace MVCGarage.Controllers
         private VehiclesRepository vehicles = new VehiclesRepository();
         private ParkingSpotsRepository parkingSpots = new ParkingSpotsRepository();
 
-        // GET: CheckIns
-        public ActionResult Index()
-        {
-            var checkIns = db.CheckIns.Include(c => c.ParkingSpot).Include(c => c.Vehicle);
-            return View(checkIns.ToList());
-        }
+        //// GET: CheckIns
+        //public ActionResult Index()
+        //{
+        //    var checkIns = db.CheckIns.Include(c => c.ParkingSpot).Include(c => c.Vehicle);
+        //    return View(checkIns.ToList());
+        //}
 
-        // GET: CheckIns/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CheckIn checkIn = db.CheckIns.Find(id);
-            if (checkIn == null)
-            {
-                return HttpNotFound();
-            }
-            return View(checkIn);
-        }
+        //// GET: CheckIns/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    CheckIn checkIn = db.CheckIns.Find(id);
+        //    if (checkIn == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(checkIn);
+        //}
 
-        // GET: CheckIns/Create
-        public ActionResult Create()
-        {
-            ViewBag.ParkingSpotID = new SelectList(db.ParkingSpots, "ID", "Label");
-            ViewBag.VehicleID = new SelectList(db.Vehicles, "ID", "Owner");
-            return View();
-        }
+        //// GET: CheckIns/Create
+        //public ActionResult Create()
+        //{
+        //    ViewBag.ParkingSpotID = new SelectList(db.ParkingSpots, "ID", "Label");
+        //    ViewBag.VehicleID = new SelectList(db.Vehicles, "ID", "Owner");
+        //    return View();
+        //}
 
-        // POST: CheckIns/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CheckInTime,Booked,Free,ParkingSpotID,VehicleID")] CheckIn checkIn)
-        {
-            if (ModelState.IsValid)
-            {
-                db.CheckIns.Add(checkIn);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: CheckIns/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,CheckInTime,Booked,Free,ParkingSpotID,VehicleID")] CheckIn checkIn)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.CheckIns.Add(checkIn);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.ParkingSpotID = new SelectList(db.ParkingSpots, "ID", "Label", checkIn.ParkingSpotID);
-            ViewBag.VehicleID = new SelectList(db.Vehicles, "ID", "Owner", checkIn.VehicleID);
-            return View(checkIn);
-        }
+        //    ViewBag.ParkingSpotID = new SelectList(db.ParkingSpots, "ID", "Label", checkIn.ParkingSpotID);
+        //    ViewBag.VehicleID = new SelectList(db.Vehicles, "ID", "Owner", checkIn.VehicleID);
+        //    return View(checkIn);
+        //}
 
-        // GET: CheckIns/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CheckIn checkIn = db.CheckIns.Find(id);
-            if (checkIn == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ParkingSpotID = new SelectList(db.ParkingSpots, "ID", "Label", checkIn.ParkingSpotID);
-            ViewBag.VehicleID = new SelectList(db.Vehicles, "ID", "Owner", checkIn.VehicleID);
-            return View(checkIn);
-        }
+        //// GET: CheckIns/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    CheckIn checkIn = db.CheckIns.Find(id);
+        //    if (checkIn == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.ParkingSpotID = new SelectList(db.ParkingSpots, "ID", "Label", checkIn.ParkingSpotID);
+        //    ViewBag.VehicleID = new SelectList(db.Vehicles, "ID", "Owner", checkIn.VehicleID);
+        //    return View(checkIn);
+        //}
 
-        // POST: CheckIns/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CheckInTime,Booked,Free,ParkingSpotID,VehicleID")] CheckIn checkIn)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(checkIn).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ParkingSpotID = new SelectList(db.ParkingSpots, "ID", "Label", checkIn.ParkingSpotID);
-            ViewBag.VehicleID = new SelectList(db.Vehicles, "ID", "Owner", checkIn.VehicleID);
-            return View(checkIn);
-        }
+        //// POST: CheckIns/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "ID,CheckInTime,Booked,Free,ParkingSpotID,VehicleID")] CheckIn checkIn)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(checkIn).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.ParkingSpotID = new SelectList(db.ParkingSpots, "ID", "Label", checkIn.ParkingSpotID);
+        //    ViewBag.VehicleID = new SelectList(db.Vehicles, "ID", "Owner", checkIn.VehicleID);
+        //    return View(checkIn);
+        //}
 
-        // GET: CheckIns/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CheckIn checkIn = db.CheckIns.Find(id);
-            if (checkIn == null)
-            {
-                return HttpNotFound();
-            }
-            return View(checkIn);
-        }
+        //// GET: CheckIns/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    CheckIn checkIn = db.CheckIns.Find(id);
+        //    if (checkIn == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(checkIn);
+        //}
 
-        // POST: CheckIns/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            CheckIn checkIn = db.CheckIns.Find(id);
-            db.CheckIns.Remove(checkIn);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: CheckIns/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    CheckIn checkIn = db.CheckIns.Find(id);
+        //    db.CheckIns.Remove(checkIn);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         [HttpGet]
         public ActionResult VehicleCheckedIn(SelectAParkingSpotVM viewModel)
@@ -165,7 +165,7 @@ namespace MVCGarage.Controllers
             if (vehicleId == null)
                 return RedirectToAction("Index");
 
-            Vehicle vehicle = vehicles.Vehicle(vehicleId);
+            CheckIn checkIn = new CheckInsVehicles();
 
             if (vehicle == null)
                 return RedirectToAction("Index");

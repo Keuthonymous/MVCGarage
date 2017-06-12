@@ -273,6 +273,9 @@
     <Content Include="Views\CheckIns\Details.cshtml" />
     <Content Include="Views\CheckIns\Edit.cshtml" />
     <Content Include="Views\CheckIns\Index.cshtml" />
+    <Content Include="Views\Owners\Create.cshtml" />
+    <Content Include="Views\Owners\Delete.cshtml" />
+    <Content Include="Views\Owners\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
