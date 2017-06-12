@@ -8,7 +8,7 @@ using System.Web;
 
 namespace MVCGarage.Repositories
 {
-    public class OwnersRepository
+    public class OwnersRepository : IDisposable
     {
         private GarageContext db = new GarageContext();
 
@@ -70,5 +70,39 @@ namespace MVCGarage.Repositories
 
             return query;
         }
+
+        public Owner Find(int? id)
+        { 
+            var query = (from o in db.Owners
+                        where o.ID == id
+                        select o).FirstOrDefault();
+
+            return query;
+        }
+
+        #region IDisposable Support
+
+        private bool disposedValue = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
 }
