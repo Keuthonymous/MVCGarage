@@ -158,6 +158,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EnumHelper.cs" />
     <Compile Include="Models\ETypeVehicle.cs" />
+    <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\ParkingSpot.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
