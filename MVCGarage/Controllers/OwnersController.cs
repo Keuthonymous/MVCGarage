@@ -19,7 +19,8 @@ namespace MVCGarage.Controllers
         // GET: Owners
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<Owner> Owners = db.GetAllOwners();
+            return View(Owners);
         }
 
         // GET: Owners/Details/5
