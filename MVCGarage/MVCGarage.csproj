@@ -253,7 +253,6 @@
     <Content Include="Views\Vehicles\UnbookParkingSpot.cshtml" />
     <Content Include="Views\Garage\Search.cshtml" />
     <Content Include="Views\Garage\Index.cshtml" />
-    <Content Include="Views\Owners\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -274,6 +273,9 @@
     <EmbeddedResource Include="Migrations\201706120845212_OwnersModel.resx">
       <DependentUpon>201706120845212_OwnersModel.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Owners\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -14,7 +14,7 @@ namespace MVCGarage.Repositories
 
         public IEnumerable<Owner> GetAllOwners ()
         {
-            return db.Owners;
+            return db.Owners.ToList();
         }
 
         public void AddNewOwner(Owner owner)
