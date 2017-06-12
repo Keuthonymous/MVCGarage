@@ -1,0 +1,63 @@
+﻿@model MVCGarage.Models.Owner
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="jumbotron header">
+    <h2>Delete an owner</h2>
+    <hr />
+    <h3>Are you sure you want to delete this?</h3>
+</div>
+
+<div>
+    <h1 style="text-align:center; color:white;">Owner</h1>
+    <hr />
+    <div class="index-table" style="color: white;">
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fname)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Lname)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LicenseNumber)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Fname)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Lname)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Gender)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.LicenseNumber)
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color" style="text-align: center; display: block; margin-bottom: 3em; color: white;">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    }
+</div>
